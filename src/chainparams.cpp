@@ -1,6 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2019 The Bitcoin Core developers
-// Copyright (c) 2018-2020 The Merge Core developers
+// Copyright (c) 2018-2020 The HodlCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -132,7 +132,7 @@ public:
         // service bits we want, but we should get them updated to support all service bits wanted by any
         // release ASAP to avoid it where possible.
 
-      //  vSeeds.emplace_back("seed.projectmerge.org");
+      //  vSeeds.emplace_back("seed.hodlcash.org");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,40);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,26);
@@ -226,7 +226,7 @@ public:
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
-       // vSeeds.emplace_back("mergetest-seed.mergeseeders.com");
+       // vSeeds.emplace_back("hodlcashtest-seed.hodlcashseeders.com");
       
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,100);

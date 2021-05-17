@@ -2,7 +2,7 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-// Based on the public domain implementation 'merged' by D. J. Bernstein
+// Based on the public domain implementation 'hodlcashd' by D. J. Bernstein
 // See https://cr.yp.to/chacha.html.
 
 #include <crypto/common.h>

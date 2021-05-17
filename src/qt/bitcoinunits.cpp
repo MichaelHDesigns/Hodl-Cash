@@ -40,9 +40,9 @@ QString BitcoinUnits::longName(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("MERGE");
-    case mBTC: return QString("mMERGE");
-    case uBTC: return QString::fromUtf8("μMERGE (bits)");
+    case BTC: return QString("HODL");
+    case mBTC: return QString("mHODL");
+    case uBTC: return QString::fromUtf8("μHODL (bits)");
     case SAT: return QString("Satoshi (sat)");
     default: return QString("???");
     }
@@ -62,9 +62,9 @@ QString BitcoinUnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Merges");
-    case mBTC: return QString("Milli-Merges (1 / 1" THIN_SP_UTF8 "000)");
-    case uBTC: return QString("Micro-Merges (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
+    case BTC: return QString("HodlCashs");
+    case mBTC: return QString("Milli-HodlCashs (1 / 1" THIN_SP_UTF8 "000)");
+    case uBTC: return QString("Micro-HodlCashs (bits) (1 / 1" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     case SAT: return QString("Satoshi (sat) (1 / 100" THIN_SP_UTF8 "000" THIN_SP_UTF8 "000)");
     default: return QString("???");
     }

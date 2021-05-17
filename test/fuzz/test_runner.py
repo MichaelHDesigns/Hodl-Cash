@@ -46,7 +46,7 @@ def main():
     )
     parser.add_argument(
         '--m_dir',
-        help='Merge inputs from this directory into the seed_dir. Needs /target subdirectory.',
+        help='HodlCash inputs from this directory into the seed_dir. Needs /target subdirectory.',
     )
 
     args = parser.parse_args()
@@ -125,11 +125,11 @@ def main():
         sys.exit(1)
 
     if args.m_dir:
-        merge_inputs(
+        hodlcash_inputs(
             corpus=args.seed_dir,
             test_list=test_list_selection,
             build_dir=config["environment"]["BUILDDIR"],
-            merge_dir=args.m_dir,
+            hodlcash_dir=args.m_dir,
         )
         return
 
@@ -141,18 +141,18 @@ def main():
     )
 
 
-def merge_inputs(*, corpus, test_list, build_dir, merge_dir):
-    logging.info("Merge the inputs in the passed dir into the seed_dir. Passed dir {}".format(merge_dir))
+def hodlcash_inputs(*, corpus, test_list, build_dir, hodlcash_dir):
+    logging.info("HodlCash the inputs in the passed dir into the seed_dir. Passed dir {}".format(hodlcash_dir))
     for t in test_list:
         args = [
             os.path.join(build_dir, 'src', 'test', 'fuzz', t),
-            '-merge=1',
+            '-hodlcash=1',
             '-use_value_profile=1',  # Also done by oss-fuzz https://github.com/google/oss-fuzz/issues/1406#issuecomment-387790487
             os.path.join(corpus, t),
-            os.path.join(merge_dir, t),
+            os.path.join(hodlcash_dir, t),
         ]
         os.makedirs(os.path.join(corpus, t), exist_ok=True)
-        os.makedirs(os.path.join(merge_dir, t), exist_ok=True)
+        os.makedirs(os.path.join(hodlcash_dir, t), exist_ok=True)
         logging.debug('Run {} with args {}'.format(t, args))
         output = subprocess.run(args, check=True, stderr=subprocess.PIPE, universal_newlines=True).stderr
         logging.debug('Output: {}'.format(output))

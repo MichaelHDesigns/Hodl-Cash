@@ -106,7 +106,7 @@ to `0.00005`.
 This is necessitated by the current transaction flooding, causing
 outrageous memory usage on nodes due to the mempool ballooning. This is a
 temporary measure, bridging the time until a dynamic method for determining
-this fee is merged (which will be in 0.12).
+this fee is hodlcashd (which will be in 0.12).
 
 (see https://github.com/bitcoin/bitcoin/pull/6793, as well as the 0.11
 release notes, in which this value was suggested)
@@ -117,7 +117,7 @@ release notes, in which this value was suggested)
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
 the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
+git hodlcash commit are mentioned.
 
 - #6438 `2531438` openssl: avoid config file load/race
 - #6439 `980f820` Updated URL location of netinstall for Debian

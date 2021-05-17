@@ -1,7 +1,7 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
 // Copyright (c) 2014-2020 The Dash Core developers
-// Copyright (c) 2018-2020 The Merge Core developers
+// Copyright (c) 2018-2020 The HodlCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -600,7 +600,7 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/projectmerge/merge>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/hodlcash/hodlcash>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i").translated, 2009, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -1947,7 +1947,7 @@ bool AppInitMain(NodeContext& node)
         banman->DumpBanlist();
     }, DUMP_BANS_INTERVAL);
 
-    //! set base feerate of 0.001 MERGE/kb
+    //! set base feerate of 0.001 HODL/kb
     CFeeRate tx_fee_rate(100000);
     GetMainWallet()->m_pay_tx_fee = tx_fee_rate;
     LogPrintf("Set default feerate to %s\n", GetMainWallet()->m_pay_tx_fee.ToString());

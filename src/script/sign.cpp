@@ -354,7 +354,7 @@ void UpdateInput(CTxIn& input, const SignatureData& data)
     input.scriptWitness = data.scriptWitness;
 }
 
-void SignatureData::MergeSignatureData(SignatureData sigdata)
+void SignatureData::HodlCashSignatureData(SignatureData sigdata)
 {
     if (complete) return;
     if (sigdata.complete) {

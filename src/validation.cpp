@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
-// Copyright (c) 2018-2020 The Merge Core developers
+// Copyright (c) 2018-2020 The HodlCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -2377,7 +2377,7 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
     int64_t nTime3 = GetTimeMicros(); nTimeConnect += nTime3 - nTime2;
     LogPrint(BCLog::BENCH, "      - Connect %u transactions: %.2fms (%.3fms/tx, %.3fms/txin) [%.2fs (%.2fms/blk)]\n", (unsigned)block.vtx.size(), MILLI * (nTime3 - nTime2), MILLI * (nTime3 - nTime2) / block.vtx.size(), nInputs <= 1 ? 0 : MILLI * (nTime3 - nTime2) / (nInputs-1), nTimeConnect * MICRO, nTimeConnect * MILLI / nBlocksTotal);
 
-    // MERGE : MODIFIED TO CHECK MASTERNODE PAYMENTS AND SUPERBLOCKS //////////////////////////////////
+    // HODL : MODIFIED TO CHECK MASTERNODE PAYMENTS AND SUPERBLOCKS //////////////////////////////////
 
     pindex->nMint = nValueOut - nValueIn + nFees;
     pindex->nMoneySupply = (pindex->pprev? pindex->pprev->nMoneySupply : 0) + nValueOut - nValueIn;
@@ -2386,16 +2386,16 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
 
     //Check that the block does not overmint
     if (pindex->nMint > blockReward) {
-        LogPrintf("ERROR: ConnectBlock(MERGE): coinbase pays too much (actual=%d vs limit=%d)\n", block.vtx[0]->GetValueOut(), blockReward);
+        LogPrintf("ERROR: ConnectBlock(HODL): coinbase pays too much (actual=%d vs limit=%d)\n", block.vtx[0]->GetValueOut(), blockReward);
         return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cb-amount");
     }
 
     if (!IsBlockPayeeValid(block, pindex->nHeight)) {
-        LogPrintf("ERROR: ConnectBlock(MERGE): couldn't find masternode or superblock payments");
+        LogPrintf("ERROR: ConnectBlock(HODL): couldn't find masternode or superblock payments");
         return state.Invalid(BlockValidationResult::BLOCK_CONSENSUS, "bad-cb-payee");
     }
 
-    ////////////////////////////////// MERGE : MODIFIED TO CHECK MASTERNODE PAYMENTS AND SUPERBLOCKS //
+    ////////////////////////////////// HODL : MODIFIED TO CHECK MASTERNODE PAYMENTS AND SUPERBLOCKS //
 
     if (!isExceptionBlock(hashPrevBlock)) {
         if (!control.Wait()) {
@@ -4603,7 +4603,7 @@ bool CVerifyDB::VerifyDB(const CChainParams& chainparams, CCoinsView *coinsview,
 /** Apply the effects of a block on the utxo cache, ignoring that it may already have been applied. */
 bool CChainState::RollforwardBlock(const CBlockIndex* pindex, CCoinsViewCache& inputs, const CChainParams& params)
 {
-    // TODO: merge with ConnectBlock
+    // TODO: hodlcash with ConnectBlock
     CBlock block;
     if (!ReadBlockFromDisk(block, pindex, params.GetConsensus())) {
         return error("ReplayBlock(): ReadBlockFromDisk failed at %d, hash=%s", pindex->nHeight, pindex->GetBlockHash().ToString());

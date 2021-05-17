@@ -108,7 +108,7 @@ Qt GUI
 * Harmonize the use of ellipsis ("...") to be used in menus, but not on buttons
 * Add 2 labels to the overviewpage that display Wallet and Transaction status (obsolete or current)
 * Extend the optionsdialog (e.g. language selection) and re-work it to a tabbed UI
-* Merge sign/verify message into a single window with tabbed UI
+* HodlCash sign/verify message into a single window with tabbed UI
 * Ensure a changed bitcoin unit immediately updates all GUI elements that use units
 * Update QR Code dialog
 * Improve error reporting at startup

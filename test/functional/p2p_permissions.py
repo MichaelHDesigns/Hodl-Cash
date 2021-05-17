@@ -56,7 +56,7 @@ class P2PPermissionsTests(BitcoinTestFramework):
             ["forcerelay", "relay", "noban", "mempool"],
             True)
 
-        # Let's make sure permissions are merged correctly
+        # Let's make sure permissions are hodlcashd correctly
         # For this, we need to use whitebind instead of bind
         # by modifying the configuration file.
         ip_port = "127.0.0.1:{}".format(p2p_port(1))

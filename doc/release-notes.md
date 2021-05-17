@@ -634,7 +634,7 @@ Build system
 - #17378 TestShell: Fix typos & implement cleanups (jachiang)
 - #17384 Create new test library (MarcoFalke)
 - #17387 `wallet_importmulti`: use addresses of the same type as being imported (achow101)
-- #17388 Add missing newline in `util_ChainMerge` test (ryanofsky)
+- #17388 Add missing newline in `util_ChainHodlCash` test (ryanofsky)
 - #17390 Add `util_ArgParsing` test (ryanofsky)
 - #17420 travis: Rework `cache_err_msg` (MarcoFalke)
 - #17423 ci: Make ci system read-only on the git work tree (MarcoFalke)
@@ -705,7 +705,7 @@ Build system
 - #18286 Add locale fuzzer to `FUZZERS_MISSING_CORPORA` (practicalswift)
 - #18292 fuzz: Add `assert(script == decompressed_script)` (MarcoFalke)
 - #18299 Update `FUZZERS_MISSING_CORPORA` to enable regression fuzzing for all harnesses in master (practicalswift)
-- #18300 fuzz: Add option to merge input dir to test runner (MarcoFalke)
+- #18300 fuzz: Add option to hodlcash input dir to test runner (MarcoFalke)
 - #18305 Explain why test logging should be used (MarcoFalke)
 - #18306 Add logging to `wallet_listsinceblock.py` (jonatack)
 - #18311 Bumpfee test fix (instagibbs)
@@ -816,7 +816,7 @@ Build system
 
 ### Miscellaneous
 - #15600 lockedpool: When possible, use madvise to avoid including sensitive information in core dumps (luke-jr)
-- #15934 Merge settings one place instead of five places (ryanofsky)
+- #15934 HodlCash settings one place instead of five places (ryanofsky)
 - #16115 On bitcoind startup, write config args to debug.log (LarryRuane)
 - #16117 util: Replace boost sleep with std sleep (MarcoFalke)
 - #16161 util: Fix compilation errors in support/lockedpool.cpp (jkczyz)

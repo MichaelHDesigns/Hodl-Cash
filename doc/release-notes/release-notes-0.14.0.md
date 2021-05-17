@@ -361,7 +361,7 @@ Unused mempool memory used by coincache
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, minor refactors and string updates. For convenience
 in locating the code changes and accompanying discussion, both the pull request
-and git merge commit are mentioned.
+and git hodlcash commit are mentioned.
 
 ### RPC and other APIs
 - #8421 `b77bb95` httpserver: drop boost dependency (theuni)
@@ -632,7 +632,7 @@ and git merge commit are mentioned.
 - #8873 `74dc388` Add microbenchmarks to profile more code paths (ryanofsky)
 - #9032 `6a8be7b` test: Add format-dependent comparison to bctest (laanwj)
 - #9023 `774db92` Add logging to bitcoin-util-test.py (jnewbery)
-- #9065 `c9bdf9a` Merge `doc/unit-tests.md` into `src/test/README.md` (laanwj)
+- #9065 `c9bdf9a` HodlCash `doc/unit-tests.md` into `src/test/README.md` (laanwj)
 - #9069 `ed64bce` Clean up bctest.py and bitcoin-util-test.py (jnewbery)
 - #9095 `b8f43e3` test: Fix test\_random includes (MarcoFalke)
 - #8894 `faec09b` Testing: Include fRelay in mininode version messages (jnewbery)

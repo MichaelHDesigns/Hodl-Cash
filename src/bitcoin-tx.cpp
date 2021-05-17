@@ -550,9 +550,9 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
         if (!findSighashFlags(nHashType, flagStr))
             throw std::runtime_error("unknown sighash flag/sign option");
 
-    // mergedTx will end up with all the signatures; it
+    // hodlcashdTx will end up with all the signatures; it
     // starts as a clone of the raw tx:
-    CMutableTransaction mergedTx{tx};
+    CMutableTransaction hodlcashdTx{tx};
     const CMutableTransaction txv{tx};
     CCoinsView viewDummy;
     CCoinsViewCache view(&viewDummy);
@@ -638,8 +638,8 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
     bool fHashSingle = ((nHashType & ~SIGHASH_ANYONECANPAY) == SIGHASH_SINGLE);
 
     // Sign what we can:
-    for (unsigned int i = 0; i < mergedTx.vin.size(); i++) {
-        CTxIn& txin = mergedTx.vin[i];
+    for (unsigned int i = 0; i < hodlcashdTx.vin.size(); i++) {
+        CTxIn& txin = hodlcashdTx.vin[i];
         const Coin& coin = view.AccessCoin(txin.prevout);
         if (coin.IsSpent()) {
             continue;
@@ -647,15 +647,15 @@ static void MutateTxSign(CMutableTransaction& tx, const std::string& flagStr)
         const CScript& prevPubKey = coin.out.scriptPubKey;
         const CAmount& amount = coin.out.nValue;
 
-        SignatureData sigdata = DataFromTransaction(mergedTx, i, coin.out);
+        SignatureData sigdata = DataFromTransaction(hodlcashdTx, i, coin.out);
         // Only sign SIGHASH_SINGLE if there's a corresponding output:
-        if (!fHashSingle || (i < mergedTx.vout.size()))
-            ProduceSignature(keystore, MutableTransactionSignatureCreator(&mergedTx, i, amount, nHashType), prevPubKey, sigdata);
+        if (!fHashSingle || (i < hodlcashdTx.vout.size()))
+            ProduceSignature(keystore, MutableTransactionSignatureCreator(&hodlcashdTx, i, amount, nHashType), prevPubKey, sigdata);
 
         UpdateInput(txin, sigdata);
     }
 
-    tx = mergedTx;
+    tx = hodlcashdTx;
 }
 
 class Secp256k1Init

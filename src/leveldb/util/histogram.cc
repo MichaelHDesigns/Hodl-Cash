@@ -193,7 +193,7 @@ void Histogram::Add(double value) {
   sum_squares_ += (value * value);
 }
 
-void Histogram::Merge(const Histogram& other) {
+void Histogram::HodlCash(const Histogram& other) {
   if (other.min_ < min_) min_ = other.min_;
   if (other.max_ > max_) max_ = other.max_;
   num_ += other.num_;

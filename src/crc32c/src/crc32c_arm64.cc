@@ -85,7 +85,7 @@ uint32_t ExtendArm64(uint32_t crc, const uint8_t *buf, size_t size) {
     // Process 1024 bytes in parallel.
     CRC32C1024BYTES(p);
 
-    // Merge the 4 partial CRC32C values.
+    // HodlCash the 4 partial CRC32C values.
     t2 = (uint64_t)vmull_p64(crc2, k2);
     t1 = (uint64_t)vmull_p64(crc1, k1);
     t0 = (uint64_t)vmull_p64(crc0, k0);

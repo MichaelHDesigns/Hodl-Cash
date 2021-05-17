@@ -43,7 +43,7 @@ SplashScreen::SplashScreen(interfaces::Node& node, Qt::WindowFlags f, const Netw
     QString copyrightTextBTC   = QChar(0xA9) + QString("2009 ") + QString(tr("The Bitcoin developers"));
     QString copyrightTextDash  = QChar(0xA9) + QString("2014 ") + QString(tr("The Dash developers"));
     QString copyrightTextPIVX  = QChar(0xA9) + QString("2018 ") + QString(tr("The PIVX developers"));
-    QString copyrightTextMERGE = QChar(0xA9) + QString("2020 ") + QString(tr("The Merge developers"));
+    QString copyrightTextHODL = QChar(0xA9) + QString("2020 ") + QString(tr("The HodlCash developers"));
     QString titleAddText = networkStyle->getTitleAddText();
 
     // create a bitmap according to device pixelratio
@@ -68,7 +68,7 @@ SplashScreen::SplashScreen(interfaces::Node& node, Qt::WindowFlags f, const Netw
     pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace, copyrightTextBTC);
     pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 12, copyrightTextDash);
     pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 24, copyrightTextPIVX);
-    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 36, copyrightTextMERGE);
+    pixPaint.drawText(paddingLeft, paddingTop + titleCopyrightVSpace + 36, copyrightTextHODL);
 
     // if the version string is too long, reduce size
     QString versionText = QString("Version %1").arg(QString::fromStdString(FormatFullVersion()));
@@ -178,6 +178,6 @@ void SplashScreen::paintEvent(QPaintEvent *event)
 
 void SplashScreen::closeEvent(QCloseEvent *event)
 {
-    m_node.startShutdown(); // allows an "emergency" shutdown during startup
+    m_node.startShutdown(); // allows an "ehodlcashncy" shutdown during startup
     event->ignore();
 }

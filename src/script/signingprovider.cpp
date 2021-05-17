@@ -55,7 +55,7 @@ bool FlatSigningProvider::GetKeyOrigin(const CKeyID& keyid, KeyOriginInfo& info)
 }
 bool FlatSigningProvider::GetKey(const CKeyID& keyid, CKey& key) const { return LookupHelper(keys, keyid, key); }
 
-FlatSigningProvider Merge(const FlatSigningProvider& a, const FlatSigningProvider& b)
+FlatSigningProvider HodlCash(const FlatSigningProvider& a, const FlatSigningProvider& b)
 {
     FlatSigningProvider ret;
     ret.scripts = a.scripts;

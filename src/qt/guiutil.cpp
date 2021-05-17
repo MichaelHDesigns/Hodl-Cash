@@ -107,7 +107,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 
     // We don't want translators to use own addresses in translations
     // and this is the only place, where this address is supplied.
-    widget->setPlaceholderText(QObject::tr("Enter a Merge address (e.g. %1)").arg(
+    widget->setPlaceholderText(QObject::tr("Enter a HodlCash address (e.g. %1)").arg(
         QString::fromStdString(DummyAddress(Params()))));
     widget->setValidator(new BitcoinAddressEntryValidator(parent));
     widget->setCheckValidator(new BitcoinAddressCheckValidator(parent));
@@ -116,7 +116,7 @@ void setupAddressWidget(QValidatedLineEdit *widget, QWidget *parent)
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
     // return if URI is not valid or is no bitcoin: URI
-    if(!uri.isValid() || uri.scheme() != QString("merge"))
+    if(!uri.isValid() || uri.scheme() != QString("hodlcash"))
         return false;
 
     SendCoinsRecipient rv;
@@ -180,7 +180,7 @@ QString formatBitcoinURI(const SendCoinsRecipient &info)
 {
     bool bech_32 = info.address.startsWith(QString::fromStdString(Params().Bech32HRP() + "1"));
 
-    QString ret = QString("merge:%1").arg(bech_32 ? info.address.toUpper() : info.address);
+    QString ret = QString("hodlcash:%1").arg(bech_32 ? info.address.toUpper() : info.address);
     int paramCount = 0;
 
     if (info.amount)
@@ -403,7 +403,7 @@ void openConfigfile()
 {
     fs::path pathConfig = GetConfigFile(gArgs.GetArg("-conf", BITCOIN_CONF_FILENAME));
 
-    /* Open merge.conf with the associated application */
+    /* Open hodlcash.conf with the associated application */
     if (fs::exists(pathConfig))
         QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 }
@@ -420,7 +420,7 @@ bool openBitcoinConf()
 
     configFile.close();
 
-    /* Open merge.conf with the associated application */
+    /* Open hodlcash.conf with the associated application */
     bool res = QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathConfig)));
 #ifdef Q_OS_MAC
     // Workaround for macOS-specific behavior; see #15409.
@@ -595,10 +595,10 @@ fs::path static StartupShortcutPath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Merge.lnk";
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "HodlCash.lnk";
     if (chain == CBaseChainParams::TESTNET) // Remove this special case when CBaseChainParams::TESTNET = "testnet4"
-        return GetSpecialFolderPath(CSIDL_STARTUP) / "Merge (testnet).lnk";
-    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("Merge (%s).lnk", chain);
+        return GetSpecialFolderPath(CSIDL_STARTUP) / "HodlCash (testnet).lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / strprintf("HodlCash (%s).lnk", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -678,8 +678,8 @@ fs::path static GetAutostartFilePath()
 {
     std::string chain = gArgs.GetChainName();
     if (chain == CBaseChainParams::MAIN)
-        return GetAutostartDir() / "merge.desktop";
-    return GetAutostartDir() / strprintf("merge-%s.desktop", chain);
+        return GetAutostartDir() / "hodlcash.desktop";
+    return GetAutostartDir() / strprintf("hodlcash-%s.desktop", chain);
 }
 
 bool GetStartOnSystemStartup()
@@ -723,9 +723,9 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
         if (chain == CBaseChainParams::MAIN)
-            optionFile << "Name=Merge\n";
+            optionFile << "Name=HodlCash\n";
         else
-            optionFile << strprintf("Name=Merge (%s)\n", chain);
+            optionFile << strprintf("Name=HodlCash (%s)\n", chain);
         optionFile << "Exec=" << pszExePath << strprintf(" -min -chain=%s\n", chain);
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";

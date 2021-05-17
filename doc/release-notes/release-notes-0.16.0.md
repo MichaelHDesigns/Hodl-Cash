@@ -577,7 +577,7 @@ Testing changes
 - #12266 `3448907` Move scheduler/threadGroup into common-init instead of per-app (TheBlueMatt)
 
 ### Miscellaneous
-- #11246 `777519b` github-merge: Coalesce git fetches (laanwj)
+- #11246 `777519b` github-hodlcash: Coalesce git fetches (laanwj)
 - #10871 `c9a4aa8` Handle getinfo in bitcoin-cli w/ -getinfo (revival of #8843) (achow101)
 - #11419 `093074b` Utils: Fix launchctl not being able to stop bitcoind (OmeGak)
 - #11394 `6e4e98e` Perform a weaker subtree check in Travis (sipa)
@@ -594,7 +594,7 @@ Testing changes
 - #10672 `6ab0e4c` Avoid division by zero in the case of a corrupt estimates file (practicalswift)
 - #11273 `cdd6bbf` Ignore old format estimation file (Xekyo)
 - #11951 `1fb34e0` Remove dead feeest-file read code for old versions (TheBlueMatt)
-- #11421 `9ccafb1` Merge current secp256k1 subtree (MarcoFalke)
+- #11421 `9ccafb1` HodlCash current secp256k1 subtree (MarcoFalke)
 - #11573 `2631d55` [Util] Update tinyformat.h (fanquake)
 - #10529 `331352f` Improve bitcoind systemd service file (Flowdalic)
 - #11620 `70fec9e` [build] .gitignore: add background.tiff (Sjors)

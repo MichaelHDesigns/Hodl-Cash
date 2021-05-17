@@ -826,7 +826,7 @@ BOOST_AUTO_TEST_CASE(util_GetChainName)
     BOOST_CHECK_THROW(test_args.GetChainName(), std::runtime_error);
 }
 
-// Test different ways settings can be merged, and verify results. This test can
+// Test different ways settings can be hodlcashd, and verify results. This test can
 // be used to confirm that updates to settings code don't change behavior
 // unintentionally.
 //
@@ -848,7 +848,7 @@ BOOST_AUTO_TEST_CASE(util_GetChainName)
 //   outside a network section, and non-network specific settings like "-server"
 //   that aren't sensitive to the network.
 //
-struct ArgsMergeTestingSetup : public BasicTestingSetup {
+struct ArgsHodlCashTestingSetup : public BasicTestingSetup {
     //! Max number of actions to sequence together. Can decrease this when
     //! debugging to make test results easier to understand.
     static constexpr int MAX_ACTIONS = 3;
@@ -858,7 +858,7 @@ struct ArgsMergeTestingSetup : public BasicTestingSetup {
 
     //! Enumerate all possible test configurations.
     template <typename Fn>
-    void ForEachMergeSetup(Fn&& fn)
+    void ForEachHodlCashSetup(Fn&& fn)
     {
         ActionList arg_actions = {};
         // command_line_options do not have sections. Only iterate over SET and NEGATE
@@ -905,20 +905,20 @@ struct ArgsMergeTestingSetup : public BasicTestingSetup {
     }
 };
 
-// Regression test covering different ways config settings can be merged. The
-// test parses and merges settings, representing the results as strings that get
+// Regression test covering different ways config settings can be hodlcashd. The
+// test parses and hodlcashs settings, representing the results as strings that get
 // compared against an expected hash. To debug, the result strings can be dumped
 // to a file (see comments below).
-BOOST_FIXTURE_TEST_CASE(util_ArgsMerge, ArgsMergeTestingSetup)
+BOOST_FIXTURE_TEST_CASE(util_ArgsHodlCash, ArgsHodlCashTestingSetup)
 {
     CHash256 out_sha;
     FILE* out_file = nullptr;
-    if (const char* out_path = getenv("ARGS_MERGE_TEST_OUT")) {
+    if (const char* out_path = getenv("ARGS_HODL_TEST_OUT")) {
         out_file = fsbridge::fopen(out_path, "w");
         if (!out_file) throw std::system_error(errno, std::generic_category(), "fopen failed");
     }
 
-    ForEachMergeSetup([&](const ActionList& arg_actions, const ActionList& conf_actions, bool soft_set, bool force_set,
+    ForEachHodlCashSetup([&](const ActionList& arg_actions, const ActionList& conf_actions, bool soft_set, bool force_set,
                           const std::string& section, const std::string& network, bool net_specific) {
         TestArgsManager parser;
         LOCK(parser.cs_args);
@@ -1015,7 +1015,7 @@ BOOST_FIXTURE_TEST_CASE(util_ArgsMerge, ArgsMergeTestingSetup)
 
     // If check below fails, should manually dump the results with:
     //
-    //   ARGS_MERGE_TEST_OUT=results.txt ./test_bitcoin --run_test=util_tests/util_ArgsMerge
+    //   ARGS_HODL_TEST_OUT=results.txt ./test_bitcoin --run_test=util_tests/util_ArgsHodlCash
     //
     // And verify diff against previous results to make sure the changes are expected.
     //
@@ -1026,7 +1026,7 @@ BOOST_FIXTURE_TEST_CASE(util_ArgsMerge, ArgsMergeTestingSetup)
 }
 
 // Similar test as above, but for ArgsManager::GetChainName function.
-struct ChainMergeTestingSetup : public BasicTestingSetup {
+struct ChainHodlCashTestingSetup : public BasicTestingSetup {
     static constexpr int MAX_ACTIONS = 2;
 
     enum Action { NONE, ENABLE_TEST, DISABLE_TEST, NEGATE_TEST, ENABLE_REG, DISABLE_REG, NEGATE_REG };
@@ -1034,7 +1034,7 @@ struct ChainMergeTestingSetup : public BasicTestingSetup {
 
     //! Enumerate all possible test configurations.
     template <typename Fn>
-    void ForEachMergeSetup(Fn&& fn)
+    void ForEachHodlCashSetup(Fn&& fn)
     {
         ActionList arg_actions = {};
         ForEachNoDup(arg_actions, ENABLE_TEST, NEGATE_REG, [&] {
@@ -1044,16 +1044,16 @@ struct ChainMergeTestingSetup : public BasicTestingSetup {
     }
 };
 
-BOOST_FIXTURE_TEST_CASE(util_ChainMerge, ChainMergeTestingSetup)
+BOOST_FIXTURE_TEST_CASE(util_ChainHodlCash, ChainHodlCashTestingSetup)
 {
     CHash256 out_sha;
     FILE* out_file = nullptr;
-    if (const char* out_path = getenv("CHAIN_MERGE_TEST_OUT")) {
+    if (const char* out_path = getenv("CHAIN_HODL_TEST_OUT")) {
         out_file = fsbridge::fopen(out_path, "w");
         if (!out_file) throw std::system_error(errno, std::generic_category(), "fopen failed");
     }
 
-    ForEachMergeSetup([&](const ActionList& arg_actions, const ActionList& conf_actions) {
+    ForEachHodlCashSetup([&](const ActionList& arg_actions, const ActionList& conf_actions) {
         TestArgsManager parser;
         LOCK(parser.cs_args);
         parser.AddArg("-regtest", "regtest", ArgsManager::ALLOW_ANY, OptionsCategory::OPTIONS);
@@ -1118,7 +1118,7 @@ BOOST_FIXTURE_TEST_CASE(util_ChainMerge, ChainMergeTestingSetup)
 
     // If check below fails, should manually dump the results with:
     //
-    //   CHAIN_MERGE_TEST_OUT=results.txt ./test_bitcoin --run_test=util_tests/util_ChainMerge
+    //   CHAIN_HODL_TEST_OUT=results.txt ./test_bitcoin --run_test=util_tests/util_ChainHodlCash
     //
     // And verify diff against previous results to make sure the changes are expected.
     //

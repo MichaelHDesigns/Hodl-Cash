@@ -16,7 +16,7 @@
 
 /**
  * Converts the parameter X to a string after macro replacement on X has been performed.
- * Don't merge these into one macro!
+ * Don't hodlcash these into one macro!
  */
 #define STRINGIZE(X) DO_STRINGIZE(X)
 #define DO_STRINGIZE(X) #X

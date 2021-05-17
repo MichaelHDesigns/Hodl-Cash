@@ -651,9 +651,9 @@ static UniValue combinerawtransaction(const JSONRPCRequest& request)
         throw JSONRPCError(RPC_DESERIALIZATION_ERROR, "Missing transactions");
     }
 
-    // mergedTx will end up with all the signatures; it
+    // hodlcashdTx will end up with all the signatures; it
     // starts as a clone of the rawtx:
-    CMutableTransaction mergedTx(txVariants[0]);
+    CMutableTransaction hodlcashdTx(txVariants[0]);
 
     // Fetch previous transactions (inputs):
     CCoinsView viewDummy;
@@ -666,7 +666,7 @@ static UniValue combinerawtransaction(const JSONRPCRequest& request)
         CCoinsViewMemPool viewMempool(&viewChain, mempool);
         view.SetBackend(viewMempool); // temporarily switch cache backend to db+mempool view
 
-        for (const CTxIn& txin : mergedTx.vin) {
+        for (const CTxIn& txin : hodlcashdTx.vin) {
             view.AccessCoin(txin.prevout); // Load entries from viewChain into view; can fail.
         }
 
@@ -675,28 +675,28 @@ static UniValue combinerawtransaction(const JSONRPCRequest& request)
 
     // Use CTransaction for the constant parts of the
     // transaction to avoid rehashing.
-    const CTransaction txConst(mergedTx);
+    const CTransaction txConst(hodlcashdTx);
     // Sign what we can:
-    for (unsigned int i = 0; i < mergedTx.vin.size(); i++) {
-        CTxIn& txin = mergedTx.vin[i];
+    for (unsigned int i = 0; i < hodlcashdTx.vin.size(); i++) {
+        CTxIn& txin = hodlcashdTx.vin[i];
         const Coin& coin = view.AccessCoin(txin.prevout);
         if (coin.IsSpent()) {
             throw JSONRPCError(RPC_VERIFY_ERROR, "Input not found or already spent");
         }
         SignatureData sigdata;
 
-        // ... and merge in other signatures:
+        // ... and hodlcash in other signatures:
         for (const CMutableTransaction& txv : txVariants) {
             if (txv.vin.size() > i) {
-                sigdata.MergeSignatureData(DataFromTransaction(txv, i, coin.out));
+                sigdata.HodlCashSignatureData(DataFromTransaction(txv, i, coin.out));
             }
         }
-        ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&mergedTx, i, coin.out.nValue, 1), coin.out.scriptPubKey, sigdata);
+        ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&hodlcashdTx, i, coin.out.nValue, 1), coin.out.scriptPubKey, sigdata);
 
         UpdateInput(txin, sigdata);
     }
 
-    return EncodeHexTx(CTransaction(mergedTx));
+    return EncodeHexTx(CTransaction(hodlcashdTx));
 }
 
 static UniValue signrawtransactionwithkey(const JSONRPCRequest& request)
@@ -1316,14 +1316,14 @@ UniValue combinepsbt(const JSONRPCRequest& request)
         psbtxs.push_back(psbtx);
     }
 
-    PartiallySignedTransaction merged_psbt;
-    const TransactionError error = CombinePSBTs(merged_psbt, psbtxs);
+    PartiallySignedTransaction hodlcashd_psbt;
+    const TransactionError error = CombinePSBTs(hodlcashd_psbt, psbtxs);
     if (error != TransactionError::OK) {
         throw JSONRPCTransactionError(error);
     }
 
     CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);
-    ssTx << merged_psbt;
+    ssTx << hodlcashd_psbt;
     return EncodeBase64((unsigned char*)ssTx.data(), ssTx.size());
 }
 
@@ -1665,28 +1665,28 @@ UniValue joinpsbts(const JSONRPCRequest& request)
     }
 
     // Create a blank psbt where everything will be added
-    PartiallySignedTransaction merged_psbt;
-    merged_psbt.tx = CMutableTransaction();
-    merged_psbt.tx->nVersion = best_version;
-    merged_psbt.tx->nLockTime = best_locktime;
+    PartiallySignedTransaction hodlcashd_psbt;
+    hodlcashd_psbt.tx = CMutableTransaction();
+    hodlcashd_psbt.tx->nVersion = best_version;
+    hodlcashd_psbt.tx->nLockTime = best_locktime;
 
-    // Merge
+    // HodlCash
     for (auto& psbt : psbtxs) {
         for (unsigned int i = 0; i < psbt.tx->vin.size(); ++i) {
-            if (!merged_psbt.AddInput(psbt.tx->vin[i], psbt.inputs[i])) {
+            if (!hodlcashd_psbt.AddInput(psbt.tx->vin[i], psbt.inputs[i])) {
                 throw JSONRPCError(RPC_INVALID_PARAMETER, strprintf("Input %s:%d exists in multiple PSBTs", psbt.tx->vin[i].prevout.hash.ToString(), psbt.tx->vin[i].prevout.n));
             }
         }
         for (unsigned int i = 0; i < psbt.tx->vout.size(); ++i) {
-            merged_psbt.AddOutput(psbt.tx->vout[i], psbt.outputs[i]);
+            hodlcashd_psbt.AddOutput(psbt.tx->vout[i], psbt.outputs[i]);
         }
-        merged_psbt.unknown.insert(psbt.unknown.begin(), psbt.unknown.end());
+        hodlcashd_psbt.unknown.insert(psbt.unknown.begin(), psbt.unknown.end());
     }
 
-    // Generate list of shuffled indices for shuffling inputs and outputs of the merged PSBT
-    std::vector<int> input_indices(merged_psbt.inputs.size());
+    // Generate list of shuffled indices for shuffling inputs and outputs of the hodlcashd PSBT
+    std::vector<int> input_indices(hodlcashd_psbt.inputs.size());
     std::iota(input_indices.begin(), input_indices.end(), 0);
-    std::vector<int> output_indices(merged_psbt.outputs.size());
+    std::vector<int> output_indices(hodlcashd_psbt.outputs.size());
     std::iota(output_indices.begin(), output_indices.end(), 0);
 
     // Shuffle input and output indices lists
@@ -1695,15 +1695,15 @@ UniValue joinpsbts(const JSONRPCRequest& request)
 
     PartiallySignedTransaction shuffled_psbt;
     shuffled_psbt.tx = CMutableTransaction();
-    shuffled_psbt.tx->nVersion = merged_psbt.tx->nVersion;
-    shuffled_psbt.tx->nLockTime = merged_psbt.tx->nLockTime;
+    shuffled_psbt.tx->nVersion = hodlcashd_psbt.tx->nVersion;
+    shuffled_psbt.tx->nLockTime = hodlcashd_psbt.tx->nLockTime;
     for (int i : input_indices) {
-        shuffled_psbt.AddInput(merged_psbt.tx->vin[i], merged_psbt.inputs[i]);
+        shuffled_psbt.AddInput(hodlcashd_psbt.tx->vin[i], hodlcashd_psbt.inputs[i]);
     }
     for (int i : output_indices) {
-        shuffled_psbt.AddOutput(merged_psbt.tx->vout[i], merged_psbt.outputs[i]);
+        shuffled_psbt.AddOutput(hodlcashd_psbt.tx->vout[i], hodlcashd_psbt.outputs[i]);
     }
-    shuffled_psbt.unknown.insert(merged_psbt.unknown.begin(), merged_psbt.unknown.end());
+    shuffled_psbt.unknown.insert(hodlcashd_psbt.unknown.begin(), hodlcashd_psbt.unknown.end());
 
     CDataStream ssTx(SER_NETWORK, PROTOCOL_VERSION);
     ssTx << shuffled_psbt;

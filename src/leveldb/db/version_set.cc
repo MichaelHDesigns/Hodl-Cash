@@ -229,7 +229,7 @@ Iterator* Version::NewConcatenatingIterator(const ReadOptions& options,
 
 void Version::AddIterators(const ReadOptions& options,
                            std::vector<Iterator*>* iters) {
-  // Merge all level zero files together since they may overlap
+  // HodlCash all level zero files together since they may overlap
   for (size_t i = 0; i < files_[0].size(); i++) {
     iters->push_back(vset_->table_cache_->NewIterator(
         options, files_[0][i]->number, files_[0][i]->file_size));
@@ -440,7 +440,7 @@ bool Version::RecordReadSample(Slice internal_key) {
   state.matches = 0;
   ForEachOverlapping(ikey.user_key, internal_key, &state, &State::Match);
 
-  // Must have at least two matches since we want to merge across
+  // Must have at least two matches since we want to hodlcash across
   // files. But what if we have a single file that contains many
   // overwrites and deletions?  Should we have another mechanism for
   // finding such files?
@@ -674,7 +674,7 @@ class VersionSet::Builder {
     BySmallestKey cmp;
     cmp.internal_comparator = &vset_->icmp_;
     for (int level = 0; level < config::kNumLevels; level++) {
-      // Merge the set of added files with the set of pre-existing files.
+      // HodlCash the set of added files with the set of pre-existing files.
       // Drop any deleted files.  Store the result in *v.
       const std::vector<FileMetaData*>& base_files = base_->files_[level];
       std::vector<FileMetaData*>::const_iterator base_iter = base_files.begin();
@@ -1038,7 +1038,7 @@ void VersionSet::Finalize(Version* v) {
       // (1) With larger write-buffer sizes, it is nice not to do too
       // many level-0 compactions.
       //
-      // (2) The files in level-0 are merged on every read and
+      // (2) The files in level-0 are hodlcashd on every read and
       // therefore we wish to avoid too many files when the individual
       // file size is small (perhaps because of a small write-buffer
       // setting, or very high compression ratios, or lots of
@@ -1216,7 +1216,7 @@ Iterator* VersionSet::MakeInputIterator(Compaction* c) {
   options.verify_checksums = options_->paranoid_checks;
   options.fill_cache = false;
 
-  // Level-0 files have to be merged together.  For other levels,
+  // Level-0 files have to be hodlcashd together.  For other levels,
   // we will make a concatenating iterator per level.
   // TODO(opt): use concatenating iterator for level-0 if there is no overlap
   const int space = (c->level() == 0 ? c->inputs_[0].size() + 1 : 2);
@@ -1493,7 +1493,7 @@ bool Compaction::IsTrivialMove() const {
   const VersionSet* vset = input_version_->vset_;
   // Avoid a move if there is lots of overlapping grandparent data.
   // Otherwise, the move could create a parent file that will require
-  // a very expensive merge later on.
+  // a very expensive hodlcash later on.
   return (num_input_files(0) == 1 && num_input_files(1) == 0 &&
           TotalFileSize(grandparents_) <=
               MaxGrandParentOverlapBytes(vset->options_));

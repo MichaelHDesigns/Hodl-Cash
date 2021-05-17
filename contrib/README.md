@@ -3,10 +3,10 @@ Repository Tools
 
 ### [Developer tools](/contrib/devtools) ###
 Specific tools for developers working on this repository.
-Additional tools, including the `github-merge.py` script, are available in the [maintainer-tools](https://github.com/bitcoin-core/bitcoin-maintainer-tools) repository.
+Additional tools, including the `github-hodlcash.py` script, are available in the [maintainer-tools](https://github.com/bitcoin-core/bitcoin-maintainer-tools) repository.
 
 ### [Verify-Commits](/contrib/verify-commits) ###
-Tool to verify that every merge commit was signed by a developer using the `github-merge.py` script.
+Tool to verify that every hodlcash commit was signed by a developer using the `github-hodlcash.py` script.
 
 ### [Linearize](/contrib/linearize) ###
 Construct a linear, no-fork, best version of the blockchain.

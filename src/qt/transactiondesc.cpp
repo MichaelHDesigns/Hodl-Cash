@@ -75,11 +75,11 @@ public:
     {
         if(instance().network == "main")
         {
-            return MERGE_INFO_MAINNET.arg("tx", txHash);
+            return HODL_INFO_MAINNET.arg("tx", txHash);
         }
         else if(instance().network == "test")
         {
-            return MERGE_INFO_TESTNET.arg("tx", txHash);
+            return HODL_INFO_TESTNET.arg("tx", txHash);
         }
 
         return txHash;

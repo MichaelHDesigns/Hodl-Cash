@@ -3096,7 +3096,7 @@ Nota: Cum taxa este calculata per byte, o taxa de "100 satoshi per kB" pentru o 
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>
-        <translation>Reductie: ultima sincronizare merge dincolo de datele reductiei. Trebuie sa faceti -reindex (sa descarcati din nou intregul blockchain in cazul unui nod redus)</translation>
+        <translation>Reductie: ultima sincronizare hodlcash dincolo de datele reductiei. Trebuie sa faceti -reindex (sa descarcati din nou intregul blockchain in cazul unui nod redus)</translation>
     </message>
     <message>
         <source>Error: A fatal internal error occurred, see debug.log for details</source>

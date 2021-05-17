@@ -216,7 +216,7 @@ New RPCs
 - `getdescriptorinfo` accepts a descriptor and returns information about
   it, including its computed checksum.
 
-- `joinpsbts` merges multiple distinct PSBTs into a single PSBT. The
+- `joinpsbts` hodlcashs multiple distinct PSBTs into a single PSBT. The
   multiple PSBTs must have different inputs. The resulting PSBT will
   contain every input and output from all of the PSBTs. Any signatures
   provided in any of the PSBTs will be dropped.
@@ -789,7 +789,7 @@ Changes for particular platforms
 - #15154 Configure: bitcoin-tx doesn't need libevent, so don't pull it in (luke-jr)
 - #15175 Drop macports support (Empact)
 - #15308 Restore compatibility with older boost (Empact)
-- #15407 msvc: Fix silent merge conflict between #13926 and #14372 part II (ken2812221)
+- #15407 msvc: Fix silent hodlcash conflict between #13926 and #14372 part II (ken2812221)
 - #15388 Makefile.am: add rule for src/bitcoin-wallet (Sjors)
 - #15393 Bump minimum Qt version to 5.5.1 (Sjors)
 - #15285 Prefer Python 3.4 even if newer versions are present on the system (Sjors)
@@ -800,7 +800,7 @@ Changes for particular platforms
 - #11526 Visual Studio build configuration for Bitcoin Core (sipsorcery)
 - #15110 build\_msvc: Fix the build problem in `libbitcoin_server` (Mr-Leshiy)
 - #14372 msvc: build secp256k1 and leveldb locally (ken2812221)
-- #15325 msvc: Fix silent merge conflict between #13926 and #14372 (ken2812221)
+- #15325 msvc: Fix silent hodlcash conflict between #13926 and #14372 (ken2812221)
 - #15391 Add compile time verification of assumptions we're currently making implicitly/tacitly (practicalswift)
 - #15503 msvc: Use a single file to specify the include path (ken2812221)
 - #13765 contrib: Add gitian build support for github pull request (ken2812221)
@@ -826,7 +826,7 @@ Changes for particular platforms
 - #13954 Warn (don't fail!) on spelling errors. Fix typos reported by codespell (practicalswift)
 - #12775 Integration of property based testing into Bitcoin Core (Christewart)
 - #14119 Read reject reasons from debug log, not P2P messages (MarcoFalke)
-- #14189 Fix silent merge conflict in `wallet_importmulti` (MarcoFalke)
+- #14189 Fix silent hodlcash conflict in `wallet_importmulti` (MarcoFalke)
 - #13419 Speed up `knapsack_solver_test` by not recreating wallet 100 times (lucash-dev)
 - #14199 Remove redundant BIP174 test from `rpc_psbt.json` (araspitzu)
 - #14179 Fixups to "Run all tests even if wallet is not compiled" (MarcoFalke)
@@ -996,14 +996,14 @@ Changes for particular platforms
 - #14947 scripts: Remove python 2 import workarounds (practicalswift)
 - #15087 Error if rpcpassword contains hash in conf sections (MeshCollider)
 - #14433 Add checksum in gitian build scripts for ossl (TheCharlatan)
-- #15165 contrib: Allow use of github api authentication in github-merge (laanwj)
+- #15165 contrib: Allow use of github api authentication in github-hodlcash (laanwj)
 - #14409 utils and libraries: Make 'blocksdir' always net specific (hebasto)
 - #14839 threads: Fix unitialized members in `sched_param` (fanquake)
 - #14955 Switch all RNG code to the built-in PRNG (sipa)
 - #15258 Scripts and tools: Fix `devtools/copyright_header.py` to always honor exclusions (Empact)
 - #12255 Update bitcoin.service to conform to init.md (dongcarl)
 - #15266 memory: Construct globals on first use (MarcoFalke)
-- #15347 Fix build after pr 15266 merged (hebasto)
+- #15347 Fix build after pr 15266 hodlcashd (hebasto)
 - #15351 Update linearize-hashes.py (OverlordQ)
 - #15358 util: Add setuphelpoptions() (MarcoFalke)
 - #15216 Scripts and tools: Replace script name with a special parameter (hebasto)

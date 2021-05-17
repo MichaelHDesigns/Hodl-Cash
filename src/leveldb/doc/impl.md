@@ -28,7 +28,7 @@ are kept around to hide obsolete values present in older sorted tables).
 The set of sorted tables are organized into a sequence of levels. The sorted
 table generated from a log file is placed in a special **young** level (also
 called level-0). When the number of young files exceeds a certain threshold
-(currently four), all of the young files are merged together with all of the
+(currently four), all of the young files are hodlcashd together with all of the
 overlapping level-1 files to produce a sequence of new level-1 files (we create
 a new level-1 file for every 2MB of data.)
 
@@ -36,8 +36,8 @@ Files in the young level may contain overlapping keys. However files in other
 levels have distinct non-overlapping key ranges. Consider level number L where
 L >= 1. When the combined size of files in level-L exceeds (10^L) MB (i.e., 10MB
 for level-1, 100MB for level-2, ...), one file in level-L, and all of the
-overlapping files in level-(L+1) are merged to form a set of new files for
-level-(L+1). These merges have the effect of gradually migrating new updates
+overlapping files in level-(L+1) are hodlcashd to form a set of new files for
+level-(L+1). These hodlcashs have the effect of gradually migrating new updates
 from the young level to the largest level using only bulk reads and writes
 (i.e., minimizing expensive seeks).
 
@@ -85,7 +85,7 @@ is special (files in it may overlap each other), we treat compactions from
 level-0 to level-1 specially: a level-0 compaction may pick more than one
 level-0 file in case some of these files overlap each other.
 
-A compaction merges the contents of the picked files to produce a sequence of
+A compaction hodlcashs the contents of the picked files to produce a sequence of
 level-(L+1) files. We switch to producing a new level-(L+1) file after the
 current output file has reached the target file size (2MB). We also switch to a
 new output file when the key range of the current output file has grown enough
@@ -132,7 +132,7 @@ corresponding memtable.
 Solution 2: We might want to decrease write rate artificially when the number of
 level-0 files goes up.
 
-Solution 3: We work on reducing the cost of very wide merges. Perhaps most of
+Solution 3: We work on reducing the cost of very wide hodlcashs. Perhaps most of
 the level-0 files will have their blocks sitting uncompressed in the cache and
 we will only need to worry about the O(N) complexity in the merging iterator.
 

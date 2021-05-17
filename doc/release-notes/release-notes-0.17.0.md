@@ -217,7 +217,7 @@ Generally, each of the above (excluding Creator and Extractor) will simply
 add more and more data to a particular PSBT. In a naive workflow, they all have
 to operate sequentially, passing the PSBT from one to the next, until the
 Extractor can convert it to a real transaction. In order to permit parallel
-operation, **Combiners** can be employed which merge metadata from different
+operation, **Combiners** can be employed which hodlcash metadata from different
 PSBTs for the same unsigned transaction.
 
 The names above in bold are the names of the roles defined in BIP174. They're
@@ -247,7 +247,7 @@ hardware implementations will typically implement multiple roles simultaneously.
   partial signatures, and if all inputs are finalized, converts the result to a
   fully signed transaction which can be broadcast with `sendrawtransaction`.
 - **`combinepsbt` (Combiner)** is a utility RPC that implements a Combiner. It
-  can be used at any point in the workflow to merge information added to
+  can be used at any point in the workflow to hodlcash information added to
   different versions of the same PSBT. In particular it is useful to combine the
   output of multiple Updaters or Signers.
 - **`decodepsbt`** is a diagnostic utility RPC which will show all information in
@@ -818,7 +818,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #12822 `ff48f62` Revert 7deba93bdc76616011a9f493cbc203d60084416f and fix expired-key-sigs properly (TheBlueMatt)
 - #12820 `5e53b80` contrib: Fix check-doc script regexes (MarcoFalke)
 - #12713 `4490871` Track negated options in the option parser (eklitzke)
-- #12708 `b2e5fe8` Make verify-commits.sh test that merges are clean (sipa)
+- #12708 `b2e5fe8` Make verify-commits.sh test that hodlcashs are clean (sipa)
 - #12891 `3190785` logging: Add lint-logs.sh to check for newline termination (jnewbery)
 - #12923 `a7cbe38` util: Pass `pthread_self()` to `pthread_setschedparam` instead of 0 (laanwj)
 - #12871 `fb17fae` Add shell script linting: Check for shellcheck warnings in shell scripts (practicalswift)
@@ -860,7 +860,7 @@ Support for Python 2 has been discontinued for all test files and tools.
 - #13809 `77168f7` contrib: Remove debian and rpm subfolder (MarcoFalke)
 - #13799 `230652c` Ignore unknown config file options; warn instead of error (sipa)
 - #13894 `df9f712` shutdown: Stop threads before resetting ptrs (MarcoFalke)
-- #13925 `71dec5c` Merge leveldb subtree (MarcoFalke)
+- #13925 `71dec5c` HodlCash leveldb subtree (MarcoFalke)
 - #13939 `ef86f26` lint: Make format string linter understand basic template parameter syntax (practicalswift)
 - #14105 `eb202ea` util: Report parse errors in configuration file (laanwj)
 - #12604 `9903537` Add DynamicMemoryUsage() to CDBWrapper to estimate LevelDB memory use (eklitzke)

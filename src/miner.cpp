@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2019 The Bitcoin Core developers
-// Copyright (c) 2018-2020 The Merge Core developers
+// Copyright (c) 2018-2020 The HodlCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -563,7 +563,7 @@ void static BitcoinMiner(const CChainParams& chainparams, CConnman& connman, CWa
             auto pblock = std::make_shared<CBlock>(pblocktemplate->block);
             IncrementExtraNonce(pblock.get(), pindexPrev, nExtraNonce);
 
-            LogPrintf("MERGEminer -- Running miner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
+            LogPrintf("HODLminer -- Running miner with %u transactions in block (%u bytes)\n", pblock->vtx.size(),
                       ::GetSerializeSize(*pblock, PROTOCOL_VERSION));
 
             //Sign block
@@ -608,7 +608,7 @@ void static BitcoinMiner(const CChainParams& chainparams, CConnman& connman, CWa
                     {
                         // Found a solution
                         SetThreadPriority(THREAD_PRIORITY_NORMAL);
-                        LogPrintf("MERGEminer:\n  proof-of-work found\n  hash: %s\n  target: %s\n", hash.GetHex(), hashTarget.GetHex());
+                        LogPrintf("HODLminer:\n  proof-of-work found\n  hash: %s\n  target: %s\n", hash.GetHex(), hashTarget.GetHex());
                         ProcessBlockFound(pblock, chainparams);
                         SetThreadPriority(THREAD_PRIORITY_LOWEST);
                         break;
@@ -638,12 +638,12 @@ void static BitcoinMiner(const CChainParams& chainparams, CConnman& connman, CWa
         }
         catch (const boost::thread_interrupted&)
         {
-            LogPrintf("MERGEminer -- terminated\n");
+            LogPrintf("HODLminer -- terminated\n");
             throw;
         }
         catch (const std::runtime_error &e)
         {
-            LogPrintf("MERGEminer -- runtime error: %s\n", e.what());
+            LogPrintf("HODLminer -- runtime error: %s\n", e.what());
         }
     }
 }

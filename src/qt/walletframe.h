@@ -23,7 +23,7 @@ QT_END_NAMESPACE
  * A container for embedding all wallet-related
  * controls into BitcoinGUI. The purpose of this class is to allow future
  * refinements of the wallet controls with minimal need for further
- * modifications to BitcoinGUI, thus greatly simplifying merges while
+ * modifications to BitcoinGUI, thus greatly simplifying hodlcashs while
  * reducing the risk of breaking top-level stuff.
  */
 class WalletFrame : public QFrame

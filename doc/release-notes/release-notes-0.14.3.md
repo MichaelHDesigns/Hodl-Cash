@@ -52,7 +52,7 @@ the transaction and shown in the final send confirmation dialog.
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
 the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
+git hodlcash commit are mentioned.
 
 ### Consensus
 - #14247 `52965fb` Fix crash bug with duplicate inputs within a transaction (TheBlueMatt, sdaftuar)

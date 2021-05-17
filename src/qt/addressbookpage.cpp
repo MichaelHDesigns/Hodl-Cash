@@ -110,12 +110,12 @@ AddressBookPage::AddressBookPage(const PlatformStyle *platformStyle, Mode _mode,
     switch(tab)
     {
     case SendingTab:
-        ui->labelExplanation->setText(tr("These are your Merge addresses for sending payments. Always check the amount and the receiving address before sending coins."));//QTUM_LINE
+        ui->labelExplanation->setText(tr("These are your HodlCash addresses for sending payments. Always check the amount and the receiving address before sending coins."));//QTUM_LINE
         ui->deleteAddress->setVisible(true);
         ui->newAddress->setVisible(true);
         break;
     case ReceivingTab:
-        ui->labelExplanation->setText(tr("These are your Merge addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses."));
+        ui->labelExplanation->setText(tr("These are your HodlCash addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses."));
         ui->deleteAddress->setVisible(false);
         ui->newAddress->setVisible(false);
         break;

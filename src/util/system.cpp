@@ -75,8 +75,8 @@ int mnConfigTotal{-1};
 bool fMasternode = false;
 std::string strMasterNodeAddr = "";
 std::string strMasterNodePrivKey = "";
-const char * const BITCOIN_CONF_FILENAME = "merge.conf";
-const char * const BITCOIN_PID_FILENAME = "merge.pid";
+const char * const BITCOIN_CONF_FILENAME = "hodlcash.conf";
+const char * const BITCOIN_PID_FILENAME = "hodlcash.pid";
 const char * const MASTERNODE_CONF_FILENAME_ARG = "-mnconf";
 const char * const MASTERNODE_CONF_FILENAME = "masternode.conf";
 
@@ -571,7 +571,7 @@ fs::path GetDefaultDataDir()
     // Unix: ~/.bitcoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Merge";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "HodlCash";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -581,10 +581,10 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // Mac
-    return pathRet / "Library/Application Support/Merge";
+    return pathRet / "Library/Application Support/HodlCash";
 #else
     // Unix
-    return pathRet / ".merge";
+    return pathRet / ".hodlcash";
 #endif
 #endif
 }
@@ -1149,8 +1149,8 @@ std::string CopyrightHolders(const std::string& strPrefix)
     std::string strCopyrightHolders = strPrefix + copyright_devs;
 
     // Make sure Bitcoin Core copyright is not removed by accident
-    if (copyright_devs.find("MErge Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Merge Core developers";
+    if (copyright_devs.find("HODL Core") == std::string::npos) {
+        strCopyrightHolders += "\n" + strPrefix + "The HodlCash Core developers";
     }
     return strCopyrightHolders;
 }

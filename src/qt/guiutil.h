@@ -135,7 +135,7 @@ namespace GUIUtil
     // Open debug.log
     void openDebugLogfile();
 
-    // Open merge.conf
+    // Open hodlcash.conf
     void openConfigfile();	
 
     // Open the config file

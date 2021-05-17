@@ -1121,7 +1121,7 @@ TEST(DBTest, RepeatedWritesToSameKey) {
   }
 }
 
-TEST(DBTest, SparseMerge) {
+TEST(DBTest, SparseHodlCash) {
   Options options = CurrentOptions();
   options.compression = kNoCompression;
   Reopen(&options);
@@ -1133,7 +1133,7 @@ TEST(DBTest, SparseMerge) {
   //    large amount of data with prefix B
   //    small amount of data with prefix C
   // and that recent updates have made small changes to all three prefixes.
-  // Check that we do not do a compaction that merges all of B in one shot.
+  // Check that we do not do a compaction that hodlcashs all of B in one shot.
   const std::string value(1000, 'x');
   Put("A", "va");
   // Write approximately 100MB of "B" values

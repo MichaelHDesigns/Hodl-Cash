@@ -39,7 +39,7 @@ Generally, each of the above (excluding Creator and Extractor) will simply
 add more and more data to a particular PSBT, until all inputs are fully signed.
 In a naive workflow, they all have to operate sequentially, passing the PSBT
 from one to the next, until the Extractor can convert it to a real transaction.
-In order to permit parallel operation, **Combiners** can be employed which merge
+In order to permit parallel operation, **Combiners** can be employed which hodlcash
 metadata from different PSBTs for the same unsigned transaction.
 
 The names above in bold are the names of the roles defined in BIP174. They're
@@ -74,7 +74,7 @@ hardware implementations will typically implement multiple roles simultaneously.
   partial signatures, and if all inputs are finalized, converts the result to a
   fully signed transaction which can be broadcast with `sendrawtransaction`.
 - **`combinepsbt` (Combiner)** is a utility RPC that implements a Combiner. It
-  can be used at any point in the workflow to merge information added to
+  can be used at any point in the workflow to hodlcash information added to
   different versions of the same PSBT. In particular it is useful to combine the
   output of multiple Updaters or Signers.
 - **`joinpsbts`** (Creator) is a utility RPC that joins multiple PSBTs together,

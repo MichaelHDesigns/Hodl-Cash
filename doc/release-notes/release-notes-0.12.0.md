@@ -469,7 +469,7 @@ a new RPC call (`clearbanned`) can be used to manually clear the list.  The new
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
 the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
+git hodlcash commit are mentioned.
 
 ### RPC and REST
 
@@ -780,7 +780,7 @@ git merge commit are mentioned.
 - #6599 `f4d88c4` Make sure LogPrint strings are line-terminated (Ross Nicoll)
 - #6630 `195942d` Replace boost::reverse_lock with our own (Casey Rodarmor)
 - #6103 `13b8282` Add ZeroMQ notifications (João Barbosa)
-- #6692 `d5d1d2e` devtools: don't push if signing fails in github-merge (Wladimir J. van der Laan)
+- #6692 `d5d1d2e` devtools: don't push if signing fails in github-hodlcash (Wladimir J. van der Laan)
 - #6728 `2b0567b` timedata: Prevent warning overkill (Wladimir J. van der Laan)
 - #6713 `f6ce59c` SanitizeString: Allow hypen char (MarcoFalke)
 - #5987 `4899a04` Bugfix: Fix testnet-in-a-box use case (Luke-Jr)

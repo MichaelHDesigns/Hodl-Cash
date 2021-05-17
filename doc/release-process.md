@@ -49,7 +49,7 @@ Release Process
 
 #### Before final release
 
-- Merge the release notes from the wiki into the branch.
+- HodlCash the release notes from the wiki into the branch.
 - Ensure the "Needs release note" label is removed from all relevant pull requests and issues.
 
 
@@ -75,9 +75,9 @@ For the period during which the notes are being edited on the wiki, the version 
 
 Write the release notes. `git shortlog` helps a lot, for example:
 
-    git shortlog --no-merges v(current version, e.g. 0.19.2)..v(new version, e.g. 0.20.0)
+    git shortlog --no-hodlcashs v(current version, e.g. 0.19.2)..v(new version, e.g. 0.20.0)
 
-(or ping @wumpus on IRC, he has specific tooling to generate the list of merged pulls
+(or ping @wumpus on IRC, he has specific tooling to generate the list of hodlcashd pulls
 and sort them into categories based on labels).
 
 Generate list of authors:
@@ -309,12 +309,12 @@ bitcoin.org (see below for bitcoin.org update instructions).
 
       - If they have, it will have previously failed their Travis CI
         checks because the final release files weren't uploaded.
-        Trigger a Travis CI rebuild---if it passes, merge.
+        Trigger a Travis CI rebuild---if it passes, hodlcash.
 
   - If they have not prepared a release, follow the Bitcoin.org release
     instructions: https://github.com/bitcoin-dot-org/bitcoin.org/blob/master/docs/adding-events-release-notes-and-alerts.md#release-notes
 
-  - After the pull request is merged, the website will automatically show the newest version within 15 minutes, as well
+  - After the pull request is hodlcashd, the website will automatically show the newest version within 15 minutes, as well
     as update the OS download links.
 
 - Update other repositories and websites for new version

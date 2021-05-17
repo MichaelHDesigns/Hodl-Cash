@@ -842,8 +842,8 @@ Subtrees
 Several parts of the repository are subtrees of software maintained elsewhere.
 
 Some of these are maintained by active developers of Bitcoin Core, in which case changes should probably go
-directly upstream without being PRed directly against the project. They will be merged back in the next
-subtree merge.
+directly upstream without being PRed directly against the project. They will be hodlcashd back in the next
+subtree hodlcash.
 
 Others are external projects without a tight relationship with our project. Changes to these should also
 be sent upstream, but bugfixes may also be prudent to PR against Bitcoin Core so that they can be integrated
@@ -989,7 +989,7 @@ Release notes should be written for any PR that:
 
 Release notes should be added to a PR-specific release note file at
 `/doc/release-notes-<PR number>.md` to avoid conflicts between multiple PRs.
-All `release-notes*` files are merged into a single
+All `release-notes*` files are hodlcashd into a single
 [/doc/release-notes.md](/doc/release-notes.md) file prior to the release.
 
 RPC interface guidelines

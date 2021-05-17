@@ -1,13 +1,13 @@
 
 
 
-Compiling Merge
+Compiling HodlCash
 ---------------
 
 ### Static compile (linux)
 
-    git clone https://github.com/ProjectMerge/merge
-    cd merge/depends
+    git clone https://github.com/ProjectHodlCash/hodlcash
+    cd hodlcash/depends
     make HOST=x86_64-linux-gnu
     cd ..
     ./autogen.sh

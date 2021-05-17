@@ -95,7 +95,7 @@ def read_logs(tmp_dir):
             break
         files.append(("node%d" % i, logfile))
 
-    return heapq.merge(*[get_log_events(source, f) for source, f in files])
+    return heapq.hodlcash(*[get_log_events(source, f) for source, f in files])
 
 
 def print_node_warnings(tmp_dir, colors):

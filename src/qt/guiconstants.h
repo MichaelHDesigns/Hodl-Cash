@@ -44,19 +44,19 @@ static const int TOOLTIP_WRAP_THRESHOLD = 80;
 /* Number of frames in spinner animation */
 #define SPINNER_FRAMES 36
 
-#define QAPP_ORG_NAME "Merge"
-#define QAPP_ORG_DOMAIN "projectmerge.org"
-#define QAPP_APP_NAME_DEFAULT "Merge-Qt"
-#define QAPP_APP_NAME_TESTNET "Merge-Qt-testnet"
-#define QAPP_APP_NAME_REGTEST "Merge-Qt-regtest"
+#define QAPP_ORG_NAME "HodlCash"
+#define QAPP_ORG_DOMAIN "hodlcash.org"
+#define QAPP_APP_NAME_DEFAULT "HodlCash-Qt"
+#define QAPP_APP_NAME_TESTNET "HodlCash-Qt-testnet"
+#define QAPP_APP_NAME_REGTEST "HodlCash-Qt-regtest"
 
 /* One gigabyte (GB) in bytes */
 static constexpr uint64_t GB_BYTES{1000000000};
 
-/* Mainnet merge explorer uri */
-static const QString MERGE_INFO_MAINNET = "<a href='https://explorer.projectmerge.org/%1/%2'>%2</a>";
+/* Mainnet hodlcash explorer uri */
+static const QString HODL_INFO_MAINNET = "<a href='https://explorer.hodlcash.org/%1/%2'>%2</a>";
 
-/* Testnet merge explorer uri */
-static const QString MERGE_INFO_TESTNET = MERGE_INFO_MAINNET;
+/* Testnet hodlcash explorer uri */
+static const QString HODL_INFO_TESTNET = HODL_INFO_MAINNET;
 
 #endif // BITCOIN_QT_GUICONSTANTS_H

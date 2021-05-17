@@ -1,6 +1,6 @@
 // Copyright (c) 2014-2017 The Dash Core developers
 // Copyright (c) 2015-2018 The PIVX developers
-// Copyright (c) 2018-2020 The Merge Core developers
+// Copyright (c) 2018-2020 The HodlCash Core developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -19,7 +19,7 @@
 CActiveMasternode activeMasternode;
 
 //
-// Bootup the Masternode, look for a 10000 MERGE input and register on the network
+// Bootup the Masternode, look for a 10000 HODL input and register on the network
 //
 void CActiveMasternode::ManageStatus(CConnman& connman)
 {

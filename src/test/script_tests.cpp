@@ -1157,8 +1157,8 @@ BOOST_AUTO_TEST_CASE(script_CHECKMULTISIG23)
 SignatureData CombineSignatures(const CTxOut& txout, const CMutableTransaction& tx, const SignatureData& scriptSig1, const SignatureData& scriptSig2)
 {
     SignatureData data;
-    data.MergeSignatureData(scriptSig1);
-    data.MergeSignatureData(scriptSig2);
+    data.HodlCashSignatureData(scriptSig1);
+    data.HodlCashSignatureData(scriptSig2);
     ProduceSignature(DUMMY_SIGNING_PROVIDER, MutableTransactionSignatureCreator(&tx, 0, txout.nValue), txout.scriptPubKey, data);
     return data;
 }

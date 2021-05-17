@@ -219,7 +219,7 @@ disable the behavior.
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
 the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
+git hodlcash commit are mentioned.
 
 ### RPC and REST
 - #5461 `5f7279a` signrawtransaction: validate private key
@@ -264,7 +264,7 @@ git merge commit are mentioned.
 - #5710 `175d86e` Add more information to errors in ReadBlockFromDisk
 - #5948 `b36f1ce` Use GetAncestor to compute new target
 - #5959 `a0bfc69` Add additional block index consistency checks
-- #6058 `7e0e7f8` autoprune minor post-merge improvements
+- #6058 `7e0e7f8` autoprune minor post-hodlcash improvements
 - #5159 `2cc1372` New fee estimation code
 - #6102 `6fb90d8` Implement accurate UTXO cache size accounting
 - #6129 `2a82298` Bug fix for clearing fCheckForPruning
@@ -306,7 +306,7 @@ git merge commit are mentioned.
 - #5509 `31dedb4` Fixes when compiling in c++11 mode
 - #5819 `f8e68f7` release: use static libstdc++ and disable reduced exports by default
 - #5510 `7c3fbc3` Big endian support
-- #5149 `c7abfa5` Add script to verify all merge commits are signed
+- #5149 `c7abfa5` Add script to verify all hodlcash commits are signed
 - #6082 `7abbb7e` qt: disable qt tests when one of the checks for the gui fails
 - #6244 `0401aa2` configure: Detect (and reject) LibreSSL
 - #6269 `95aca44` gitian: Use the new bitcoin-detached-sigs git repo for OSX signatures

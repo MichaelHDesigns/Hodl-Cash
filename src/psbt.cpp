@@ -17,18 +17,18 @@ bool PartiallySignedTransaction::IsNull() const
     return !tx && inputs.empty() && outputs.empty() && unknown.empty();
 }
 
-bool PartiallySignedTransaction::Merge(const PartiallySignedTransaction& psbt)
+bool PartiallySignedTransaction::HodlCash(const PartiallySignedTransaction& psbt)
 {
-    // Prohibited to merge two PSBTs over different transactions
+    // Prohibited to hodlcash two PSBTs over different transactions
     if (tx->GetHash() != psbt.tx->GetHash()) {
         return false;
     }
 
     for (unsigned int i = 0; i < inputs.size(); ++i) {
-        inputs[i].Merge(psbt.inputs[i]);
+        inputs[i].HodlCash(psbt.inputs[i]);
     }
     for (unsigned int i = 0; i < outputs.size(); ++i) {
-        outputs[i].Merge(psbt.outputs[i]);
+        outputs[i].HodlCash(psbt.outputs[i]);
     }
     unknown.insert(psbt.unknown.begin(), psbt.unknown.end());
 
@@ -132,7 +132,7 @@ void PSBTInput::FromSignatureData(const SignatureData& sigdata)
     }
 }
 
-void PSBTInput::Merge(const PSBTInput& input)
+void PSBTInput::HodlCash(const PSBTInput& input)
 {
     if (!non_witness_utxo && input.non_witness_utxo) non_witness_utxo = input.non_witness_utxo;
     if (witness_utxo.IsNull() && !input.witness_utxo.IsNull()) {
@@ -181,7 +181,7 @@ bool PSBTOutput::IsNull() const
     return redeem_script.empty() && witness_script.empty() && hd_keypaths.empty() && unknown.empty();
 }
 
-void PSBTOutput::Merge(const PSBTOutput& output)
+void PSBTOutput::HodlCash(const PSBTOutput& output)
 {
     hd_keypaths.insert(output.hd_keypaths.begin(), output.hd_keypaths.end());
     unknown.insert(output.unknown.begin(), output.unknown.end());
@@ -315,9 +315,9 @@ TransactionError CombinePSBTs(PartiallySignedTransaction& out, const std::vector
 {
     out = psbtxs[0]; // Copy the first one
 
-    // Merge
+    // HodlCash
     for (auto it = std::next(psbtxs.begin()); it != psbtxs.end(); ++it) {
-        if (!out.Merge(*it)) {
+        if (!out.HodlCash(*it)) {
             return TransactionError::PSBT_MISMATCH;
         }
     }

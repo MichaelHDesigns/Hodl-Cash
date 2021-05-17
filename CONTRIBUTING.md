@@ -66,7 +66,7 @@ your decisions. Further explanation [here](https://chris.beams.io/posts/git-comm
 
 If a particular commit references another issue, please add the reference. For
 example: `refs #1234` or `fixes #4321`. Using the `fixes` or `closes` keywords
-will cause the corresponding issue to be closed when the pull request is merged.
+will cause the corresponding issue to be closed when the pull request is hodlcashd.
 
 Commit messages should never contain any `@` mentions.
 
@@ -123,7 +123,7 @@ Note: Code review is a burdensome but important part of the development process,
 
 If your pull request contains fixup commits (commits that change the same line of code repeatedly) or too fine-grained
 commits, you may be asked to [squash](https://git-scm.com/docs/git-rebase#_interactive_mode) your commits
-before it will be merged. The basic squashing workflow is shown below.
+before it will be hodlcashd. The basic squashing workflow is shown below.
 
     git checkout your_branch_name
     git rebase -i HEAD~n
@@ -154,15 +154,15 @@ pull request to pull request.
 When a pull request conflicts with the target branch, you may be asked to rebase it on top of the current target branch.
 The `git rebase` command will take care of rebuilding your commits on top of the new base.
 
-This project aims to have a clean git history, where code changes are only made in non-merge commits. This simplifies
-auditability because merge commits can be assumed to not contain arbitrary code changes. Merge commits should be signed,
+This project aims to have a clean git history, where code changes are only made in non-hodlcash commits. This simplifies
+auditability because hodlcash commits can be assumed to not contain arbitrary code changes. HodlCash commits should be signed,
 and the resulting git tree hash must be deterministic and reproducible. The script in
 [/contrib/verify-commits](/contrib/verify-commits) checks that.
 
 After a rebase, reviewers are encouraged to sign off on the force push. This should be relatively straightforward with
 the `git range-diff` tool explained in the [productivity
 notes](/doc/productivity.md#diff-the-diffs-with-git-range-diff). To avoid needless review churn, maintainers will
-generally merge pull requests that received the most review attention first.
+generally hodlcash pull requests that received the most review attention first.
 
 Pull Request Philosophy
 -----------------------
@@ -212,7 +212,7 @@ The following applies to code changes to the Bitcoin Core project (and related
 projects such as libsecp256k1), and is not to be confused with overall Bitcoin
 Network Protocol consensus changes.
 
-Whether a pull request is merged into Bitcoin Core rests with the project merge
+Whether a pull request is hodlcashd into Bitcoin Core rests with the project hodlcash
 maintainers and ultimately the project lead.
 
 Maintainers will take into consideration if a patch is in line with the general
@@ -245,7 +245,7 @@ Anyone may participate in peer review which is expressed by comments in the pull
 request. Typically reviewers will review the code for obvious errors, as well as
 test out the patch set and opine on the technical merits of the patch. Project
 maintainers take into account the peer review when determining if there is
-consensus to merge a pull request (remember that discussions may have been
+consensus to hodlcash a pull request (remember that discussions may have been
 spread out over GitHub, mailing list and IRC discussions).
 
 #### Conceptual Review
@@ -272,7 +272,7 @@ language is used within pull-request comments:
     tests, and in case it is not obvious how the manual testing was done, it should
     be described;
   - "I have not tested the code, but I have reviewed it and it looks
-    OK, I agree it can be merged";
+    OK, I agree it can be hodlcashd";
   - Nit refers to trivial, often non-blocking issues.
 
 Project maintainers reserve the right to weigh the opinions of peer reviewers
@@ -330,7 +330,7 @@ Security and bug fixes can be backported from `master` to release
 branches.
 If the backport is non-trivial, it may be appropriate to open an
 additional PR, to backport the change, only after the original PR
-has been merged.
+has been hodlcashd.
 Otherwise, backports will be done in batches and
 the maintainers will use the proper `Needs backport (...)` labels
 when needed (the original author does not need to worry).

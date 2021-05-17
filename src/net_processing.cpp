@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
-// Copyright (c) 2018-2020 The Merge Core developers
+// Copyright (c) 2018-2020 The HodlCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -2002,9 +2002,9 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
         if (!vRecv.empty())
             vRecv >> fRelay;
 	// Disconnect from old peers
-	if (cleanSubVer == "/Merge Core:1.0.0/" ||
-	    cleanSubVer == "/Merge Core:1.0.1/" ||
-	    cleanSubVer == "/Merge Core:1.0.2/") {
+	if (cleanSubVer == "/HodlCash Core:1.0.0/" ||
+	    cleanSubVer == "/HodlCash Core:1.0.1/" ||
+	    cleanSubVer == "/HodlCash Core:1.0.2/") {
 	    LogPrint(BCLog::NET, "peer=%d using obsolete version %s; disconnecting\n", pfrom->GetId(), cleanSubVer);
 	    pfrom->fDisconnect = true;
 	    return false;

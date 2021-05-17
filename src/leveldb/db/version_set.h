@@ -68,7 +68,7 @@ class Version {
   };
 
   // Append to *iters a sequence of iterators that will
-  // yield the contents of this Version when merged together.
+  // yield the contents of this Version when hodlcashd together.
   // REQUIRES: This version has been saved (see VersionSet::SaveTo)
   void AddIterators(const ReadOptions&, std::vector<Iterator*>* iters);
 
@@ -321,7 +321,7 @@ class Compaction {
   ~Compaction();
 
   // Return the level that is being compacted.  Inputs from "level"
-  // and "level+1" will be merged to produce a set of "level+1" files.
+  // and "level+1" will be hodlcashd to produce a set of "level+1" files.
   int level() const { return level_; }
 
   // Return the object that holds the edits to the descriptor done

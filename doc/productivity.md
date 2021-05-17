@@ -10,12 +10,12 @@ Table of Contents
    * [Make use of your threads with `make -j`](#make-use-of-your-threads-with-make--j)
    * [Only build what you need](#only-build-what-you-need)
    * [Multiple working directories with `git worktrees`](#multiple-working-directories-with-git-worktrees)
-   * [Interactive "dummy rebases" for fixups and execs with `git merge-base`](#interactive-dummy-rebases-for-fixups-and-execs-with-git-merge-base)
+   * [Interactive "dummy rebases" for fixups and execs with `git hodlcash-base`](#interactive-dummy-rebases-for-fixups-and-execs-with-git-hodlcash-base)
 * [Writing code](#writing-code)
    * [Format C/C++/Protobuf diffs with `clang-format-diff.py`](#format-ccprotobuf-diffs-with-clang-format-diffpy)
    * [Format Python diffs with `yapf-diff.py`](#format-python-diffs-with-yapf-diffpy)
 * [Rebasing/Merging code](#rebasingmerging-code)
-   * [More conflict context with `merge.conflictstyle diff3`](#more-conflict-context-with-mergeconflictstyle-diff3)
+   * [More conflict context with `hodlcash.conflictstyle diff3`](#more-conflict-context-with-hodlcashconflictstyle-diff3)
 * [Reviewing code](#reviewing-code)
    * [Reduce mental load with `git diff` options](#reduce-mental-load-with-git-diff-options)
    * [Reference PRs easily with `refspec`s](#reference-prs-easily-with-refspecs)
@@ -94,19 +94,19 @@ To simply check out a commit-ish under a new working directory without disruptin
 git worktree add --checkout ../where-my-checkout-commit-ish-will-live my-checkout-commit-ish
 ```
 
-### Interactive "dummy rebases" for fixups and execs with `git merge-base`
+### Interactive "dummy rebases" for fixups and execs with `git hodlcash-base`
 
-When rebasing, we often want to do a "dummy rebase," whereby we are not rebasing over an updated master but rather over the last common commit with master. This might be useful for rearranging commits, `rebase --autosquash`ing, or `rebase --exec`ing without introducing conflicts that arise from an updated master. In these situations, we can use `git merge-base` to identify the last common commit with master, and rebase off of that.
+When rebasing, we often want to do a "dummy rebase," whereby we are not rebasing over an updated master but rather over the last common commit with master. This might be useful for rearranging commits, `rebase --autosquash`ing, or `rebase --exec`ing without introducing conflicts that arise from an updated master. In these situations, we can use `git hodlcash-base` to identify the last common commit with master, and rebase off of that.
 
 To squash in `git commit --fixup` commits without rebasing over an updated master, we can do the following:
 
 ```sh
-git rebase -i --autosquash "$(git merge-base master HEAD)"
+git rebase -i --autosquash "$(git hodlcash-base master HEAD)"
 ```
 
 To execute `make check` on every commit since last diverged from master, but without rebasing over an updated master, we can do the following:
 ```sh
-git rebase -i --exec "make check" "$(git merge-base master HEAD)"
+git rebase -i --exec "make check" "$(git hodlcash-base master HEAD)"
 ```
 
 -----
@@ -129,9 +129,9 @@ Usage is exactly the same as [`clang-format-diff.py`](#format-ccprotobuf-diffs-w
 Rebasing/Merging code
 -------------
 
-### More conflict context with `merge.conflictstyle diff3`
+### More conflict context with `hodlcash.conflictstyle diff3`
 
-For resolving merge/rebase conflicts, it can be useful to enable diff3 style using `git config merge.conflictstyle diff3`. Instead of
+For resolving hodlcash/rebase conflicts, it can be useful to enable diff3 style using `git config hodlcash.conflictstyle diff3`. Instead of
 
 ```diff
 <<<
@@ -176,7 +176,7 @@ When looking at other's pull requests, it may make sense to add the following se
         url = git@github.com:bitcoin/bitcoin.git
 ```
 
-This will add an `upstream-pull` remote to your git repository, which can be fetched using `git fetch --all` or `git fetch upstream-pull`. It will download and store on disk quite a lot of data (all PRs, including merged and closed ones). Afterwards, you can use `upstream-pull/NUMBER/head` in arguments to `git show`, `git checkout` and anywhere a commit id would be acceptable to see the changes from pull request NUMBER.
+This will add an `upstream-pull` remote to your git repository, which can be fetched using `git fetch --all` or `git fetch upstream-pull`. It will download and store on disk quite a lot of data (all PRs, including hodlcashd and closed ones). Afterwards, you can use `upstream-pull/NUMBER/head` in arguments to `git show`, `git checkout` and anywhere a commit id would be acceptable to see the changes from pull request NUMBER.
 
 ### Diff the diffs with `git range-diff`
 
@@ -205,7 +205,7 @@ Note that `git range-diff` also work for rebases:
                   \
                    P1--P2--N3--N4  <-- new-head (with P3 modified, P4 & P5 squashed)
 
-PREV=P5 N=4 && git range-diff `git merge-base --all HEAD $PREV`...$PREV HEAD~$N...HEAD
+PREV=P5 N=4 && git range-diff `git hodlcash-base --all HEAD $PREV`...$PREV HEAD~$N...HEAD
 ```
 
 Where `P5` is the commit you last reviewed and `4` is the number of commits in the new version.

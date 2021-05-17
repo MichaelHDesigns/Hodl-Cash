@@ -13,7 +13,7 @@
 - (NSString *)__bundleIdentifier
 {
     if (self == [NSBundle mainBundle]) {
-        return @"org.merge.Merge-Qt";
+        return @"org.hodlcash.HodlCash-Qt";
     } else {
         return [self __bundleIdentifier];
     }

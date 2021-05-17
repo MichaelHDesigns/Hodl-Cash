@@ -195,8 +195,8 @@ class Stats {
     start_ = finish_ = last_op_finish_ = g_env->NowMicros();
   }
 
-  void Merge(const Stats& other) {
-    hist_.Merge(other.hist_);
+  void HodlCash(const Stats& other) {
+    hist_.HodlCash(other.hist_);
     done_ += other.done_;
     bytes_ += other.bytes_;
     seconds_ += other.seconds_;
@@ -601,7 +601,7 @@ class Benchmark {
     shared.mu.Unlock();
 
     for (int i = 1; i < n; i++) {
-      arg[0].thread->stats.Merge(arg[i].thread->stats);
+      arg[0].thread->stats.HodlCash(arg[i].thread->stats);
     }
     arg[0].thread->stats.Report(name);
 

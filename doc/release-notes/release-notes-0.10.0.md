@@ -549,7 +549,7 @@ GUI:
 - `a49f11d` Change splash screen to normal window
 - `1f9be98` Disable App Nap on OSX 10.9+
 - `27c3e91` Add proxy to options overridden if necessary
-- `4bd1185` Allow "emergency" shutdown during startup
+- `4bd1185` Allow "ehodlcashncy" shutdown during startup
 - `d52f072` Don't show wallet options in the preferences menu when running with -disablewallet
 - `6093aa1` Qt: QProgressBar CPU-Issue workaround
 - `0ed9675` [Wallet] Add global boolean whether to send free transactions (default=true)
@@ -646,7 +646,7 @@ Miscellaneous:
 - `d6712db` Also create pid file in non-daemon mode
 - `772ab0e` contrib: use batched JSON-RPC in linarize-hashes (optimization)
 - `7ab4358` Update bash-completion for v0.10
-- `6e6a36c` contrib: show pull # in prompt for github-merge script
+- `6e6a36c` contrib: show pull # in prompt for github-hodlcash script
 - `5b9f842` Upgrade leveldb to 1.18, make chainstate databases compatible between ARM and x86 (issue #2293)
 - `4e7c219` Catch UTXO set read errors and shutdown
 - `867c600` Catch LevelDB errors during flush

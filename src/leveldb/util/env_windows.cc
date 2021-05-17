@@ -571,7 +571,7 @@ class WindowsEnv : public Env {
     // Try the full-blown replace if the move fails, as ReplaceFile will only
     // succeed when |to| does exist. When writing to a network share, we may not
     // be able to change the ACLs. Ignore ACL errors then
-    // (REPLACEFILE_IGNORE_MERGE_ERRORS).
+    // (REPLACEFILE_IGNORE_HODL_ERRORS).
     if (::ReplaceFileW(wTo.c_str(), wFrom.c_str(), /*lpBackupFileName=*/nullptr,
                        REPLACEFILE_IGNORE_MERGE_ERRORS,
                        /*lpExclude=*/nullptr, /*lpReserved=*/nullptr)) {

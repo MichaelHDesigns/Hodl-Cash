@@ -28,7 +28,7 @@ static void CheckValues(const util::Settings& settings, const std::string& singl
     BOOST_CHECK_EQUAL(list_value.write().c_str(), list_val);
 };
 
-// Simple settings merge test case.
+// Simple settings hodlcash test case.
 BOOST_AUTO_TEST_CASE(Simple)
 {
     util::Settings settings;
@@ -60,10 +60,10 @@ BOOST_AUTO_TEST_CASE(NullOverride)
     BOOST_CHECK_EQUAL(R"(null)", GetSetting(settings, "section", "name", false, false).write().c_str());
 }
 
-// Test different ways settings can be merged, and verify results. This test can
+// Test different ways settings can be hodlcashd, and verify results. This test can
 // be used to confirm that updates to settings code don't change behavior
 // unintentionally.
-struct MergeTestingSetup : public BasicTestingSetup {
+struct HodlCashTestingSetup : public BasicTestingSetup {
     //! Max number of actions to sequence together. Can decrease this when
     //! debugging to make test results easier to understand.
     static constexpr int MAX_ACTIONS = 3;
@@ -73,7 +73,7 @@ struct MergeTestingSetup : public BasicTestingSetup {
 
     //! Enumerate all possible test configurations.
     template <typename Fn>
-    void ForEachMergeSetup(Fn&& fn)
+    void ForEachHodlCashSetup(Fn&& fn)
     {
         ActionList arg_actions = {};
         // command_line_options do not have sections. Only iterate over SET and NEGATE
@@ -90,21 +90,21 @@ struct MergeTestingSetup : public BasicTestingSetup {
     }
 };
 
-// Regression test covering different ways config settings can be merged. The
-// test parses and merges settings, representing the results as strings that get
+// Regression test covering different ways config settings can be hodlcashd. The
+// test parses and hodlcashs settings, representing the results as strings that get
 // compared against an expected hash. To debug, the result strings can be dumped
 // to a file (see comments below).
-BOOST_FIXTURE_TEST_CASE(Merge, MergeTestingSetup)
+BOOST_FIXTURE_TEST_CASE(HodlCash, HodlCashTestingSetup)
 {
     CHash256 out_sha;
     FILE* out_file = nullptr;
-    if (const char* out_path = getenv("SETTINGS_MERGE_TEST_OUT")) {
+    if (const char* out_path = getenv("SETTINGS_HODL_TEST_OUT")) {
         out_file = fsbridge::fopen(out_path, "w");
         if (!out_file) throw std::system_error(errno, std::generic_category(), "fopen failed");
     }
 
     const std::string& network = CBaseChainParams::MAIN;
-    ForEachMergeSetup([&](const ActionList& arg_actions, const ActionList& conf_actions, bool force_set,
+    ForEachHodlCashSetup([&](const ActionList& arg_actions, const ActionList& conf_actions, bool force_set,
                           bool ignore_default_section_config) {
         std::string desc;
         int value_suffix = 0;
@@ -165,7 +165,7 @@ BOOST_FIXTURE_TEST_CASE(Merge, MergeTestingSetup)
 
     // If check below fails, should manually dump the results with:
     //
-    //   SETTINGS_MERGE_TEST_OUT=results.txt ./test_bitcoin --run_test=settings_tests/Merge
+    //   SETTINGS_HODL_TEST_OUT=results.txt ./test_bitcoin --run_test=settings_tests/HodlCash
     //
     // And verify diff against previous results to make sure the changes are expected.
     //

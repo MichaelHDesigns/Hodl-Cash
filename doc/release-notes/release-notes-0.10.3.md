@@ -105,7 +105,7 @@ to `0.00005`.
 This is necessitated by the current transaction flooding, causing
 outrageous memory usage on nodes due to the mempool ballooning. This is a
 temporary measure, bridging the time until a dynamic method for determining
-this fee is merged (which will be in 0.12).
+this fee is hodlcashd (which will be in 0.12).
 
 (see https://github.com/bitcoin/bitcoin/pull/6793, as well as the 0.11.0
 release notes, in which this value was suggested)

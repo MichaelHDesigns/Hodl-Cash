@@ -149,7 +149,7 @@ static bool SaveError(char** errptr, const Status& s) {
   } else if (*errptr == nullptr) {
     *errptr = strdup(s.ToString().c_str());
   } else {
-    // TODO(sanjay): Merge with existing error?
+    // TODO(sanjay): HodlCash with existing error?
     free(*errptr);
     *errptr = strdup(s.ToString().c_str());
   }

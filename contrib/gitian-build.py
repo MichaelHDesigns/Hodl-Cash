@@ -232,9 +232,9 @@ def main():
 
     os.chdir('bitcoin')
     if args.pull:
-        subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/merge'])
+        subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/hodlcash'])
         os.chdir('../gitian-builder/inputs/bitcoin')
-        subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/merge'])
+        subprocess.check_call(['git', 'fetch', args.url, 'refs/pull/'+args.version+'/hodlcash'])
         args.commit = subprocess.check_output(['git', 'show', '-s', '--format=%H', 'FETCH_HEAD'], universal_newlines=True, encoding='utf8').strip()
         args.version = 'pull-' + args.version
     print(args.commit)

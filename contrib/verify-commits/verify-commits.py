@@ -16,7 +16,7 @@ GIT = os.getenv('GIT', 'git')
 def tree_sha512sum(commit='HEAD'):
     """Calculate the Tree-sha512 for the commit.
 
-    This is copied from github-merge.py. See https://github.com/bitcoin-core/bitcoin-maintainer-tools."""
+    This is copied from github-hodlcash.py. See https://github.com/bitcoin-core/bitcoin-maintainer-tools."""
 
     # request metadata for entire tree, recursively
     files = []
@@ -75,8 +75,8 @@ def main():
     # Parse arguments
     parser = argparse.ArgumentParser(usage='%(prog)s [options] [commit id]')
     parser.add_argument('--disable-tree-check', action='store_false', dest='verify_tree', help='disable SHA-512 tree check')
-    parser.add_argument('--clean-merge', type=float, dest='clean_merge', default=float('inf'), help='Only check clean merge after <NUMBER> days ago (default: %(default)s)', metavar='NUMBER')
-    parser.add_argument('commit', nargs='?', default='HEAD', help='Check clean merge up to commit <commit>')
+    parser.add_argument('--clean-hodlcash', type=float, dest='clean_hodlcash', default=float('inf'), help='Only check clean hodlcash after <NUMBER> days ago (default: %(default)s)', metavar='NUMBER')
+    parser.add_argument('commit', nargs='?', default='HEAD', help='Check clean hodlcash up to commit <commit>')
     args = parser.parse_args()
 
     # get directory of this program and read data files
@@ -85,7 +85,7 @@ def main():
     verified_root = open(dirname + "/trusted-git-root", "r", encoding="utf8").read().splitlines()[0]
     verified_sha512_root = open(dirname + "/trusted-sha512-root-commit", "r", encoding="utf8").read().splitlines()[0]
     revsig_allowed = open(dirname + "/allow-revsig-commits", "r", encoding="utf-8").read().splitlines()
-    unclean_merge_allowed = open(dirname + "/allow-unclean-merge-commits", "r", encoding="utf-8").read().splitlines()
+    unclean_hodlcash_allowed = open(dirname + "/allow-unclean-hodlcash-commits", "r", encoding="utf-8").read().splitlines()
     incorrect_sha512_allowed = open(dirname + "/allow-incorrect-sha512-commits", "r", encoding="utf-8").read().splitlines()
 
     # Set commit and branch and set variables
@@ -136,23 +136,23 @@ def main():
                 print("Tree-SHA512 did not match for commit " + current_commit, file=sys.stderr)
                 sys.exit(1)
 
-        # Merge commits should only have two parents
+        # HodlCash commits should only have two parents
         parents = subprocess.check_output([GIT, 'show', '-s', '--format=format:%P', current_commit]).decode('utf8').splitlines()[0].split(' ')
         if len(parents) > 2:
-            print("Commit {} is an octopus merge".format(current_commit), file=sys.stderr)
+            print("Commit {} is an octopus hodlcash".format(current_commit), file=sys.stderr)
             sys.exit(1)
 
-        # Check that the merge commit is clean
+        # Check that the hodlcash commit is clean
         commit_time = int(subprocess.check_output([GIT, 'show', '-s', '--format=format:%ct', current_commit]).decode('utf8').splitlines()[0])
-        check_merge = commit_time > time.time() - args.clean_merge * 24 * 60 * 60  # Only check commits in clean_merge days
-        allow_unclean = current_commit in unclean_merge_allowed
-        if len(parents) == 2 and check_merge and not allow_unclean:
+        check_hodlcash = commit_time > time.time() - args.clean_hodlcash * 24 * 60 * 60  # Only check commits in clean_hodlcash days
+        allow_unclean = current_commit in unclean_hodlcash_allowed
+        if len(parents) == 2 and check_hodlcash and not allow_unclean:
             current_tree = subprocess.check_output([GIT, 'show', '--format=%T', current_commit]).decode('utf8').splitlines()[0]
             subprocess.call([GIT, 'checkout', '--force', '--quiet', parents[0]])
-            subprocess.call([GIT, 'merge', '--no-ff', '--quiet', '--no-gpg-sign', parents[1]], stdout=subprocess.DEVNULL)
+            subprocess.call([GIT, 'hodlcash', '--no-ff', '--quiet', '--no-gpg-sign', parents[1]], stdout=subprocess.DEVNULL)
             recreated_tree = subprocess.check_output([GIT, 'show', '--format=format:%T', 'HEAD']).decode('utf8').splitlines()[0]
             if current_tree != recreated_tree:
-                print("Merge commit {} is not clean".format(current_commit), file=sys.stderr)
+                print("HodlCash commit {} is not clean".format(current_commit), file=sys.stderr)
                 subprocess.call([GIT, 'diff', current_commit])
                 subprocess.call([GIT, 'checkout', '--force', '--quiet', branch])
                 sys.exit(1)

@@ -367,7 +367,7 @@ Low-level ZMQ changes
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
 the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
+git hodlcash commit are mentioned.
 
 ### RPC and other APIs
 
@@ -672,7 +672,7 @@ git merge commit are mentioned.
 - #7751 `84370d5` test_framework: python3.4 authproxy compat (laanwj)
 - #7744 `d8e862a` test_framework: detect failure of bitcoind startup (laanwj)
 - #8280 `115735d` Increase sync_blocks() timeouts in pruning.py (MarcoFalke)
-- #8340 `af9b7a9` Solve trivial merge conflict in p2p-segwit.py (MarcoFalke)
+- #8340 `af9b7a9` Solve trivial hodlcash conflict in p2p-segwit.py (MarcoFalke)
 - #8067 `3e4cf8f` Travis: use slim generic image, and some fixups (theuni)
 - #7951 `5c7df70` Test_framework: Properly print exception (MarcoFalke)
 - #8070 `7771aa5` Remove non-determinism which is breaking net_tests #8069 (EthanHeilman)
@@ -745,14 +745,14 @@ git merge commit are mentioned.
 - #7113 `54a550b` Switch to a more efficient rolling Bloom filter (sipa)
 - #7257 `de9e5ea` Combine common error strings for different options so translations can be shared and reused (luke-jr)
 - #7304 `b8f485c` [contrib] Add clang-format-diff.py (MarcoFalke)
-- #7378 `e6f97ef` devtools: replace github-merge with python version (laanwj)
-- #7395 `0893705` devtools: show pull and commit information in github-merge (laanwj)
-- #7402 `6a5932b` devtools: github-merge get toplevel dir without extra whitespace (achow101)
-- #7425 `20a408c` devtools: Fix utf-8 support in messages for github-merge (laanwj)
+- #7378 `e6f97ef` devtools: replace github-hodlcash with python version (laanwj)
+- #7395 `0893705` devtools: show pull and commit information in github-hodlcash (laanwj)
+- #7402 `6a5932b` devtools: github-hodlcash get toplevel dir without extra whitespace (achow101)
+- #7425 `20a408c` devtools: Fix utf-8 support in messages for github-hodlcash (laanwj)
 - #7632 `409f843` Delete outdated test-patches reference (Lewuathe)
 - #7662 `386f438` remove unused NOBLKS_VERSION_{START,END} constants (rat4)
-- #7737 `aa0d2b2` devtools: make github-merge.py use py3 (laanwj)
-- #7781 `55db5f0` devtools: Auto-set branch to merge to in github-merge (laanwj)
+- #7737 `aa0d2b2` devtools: make github-hodlcash.py use py3 (laanwj)
+- #7781 `55db5f0` devtools: Auto-set branch to hodlcash to in github-hodlcash (laanwj)
 - #7934 `f17032f` Improve rolling bloom filter performance and benchmark (sipa)
 - #8004 `2efe38b` signal handling: fReopenDebugLog and fRequestShutdown should be type sig_atomic_t (catilac)
 - #7713 `f6598df` Fixes for verify-commits script (petertodd)

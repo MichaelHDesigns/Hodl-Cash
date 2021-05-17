@@ -204,7 +204,7 @@ void BitcoinCore::shutdown()
 }
 
 static int qt_argc = 1;
-static const char* qt_argv = "merge-qt";
+static const char* qt_argv = "hodlcash-qt";
 
 BitcoinApplication::BitcoinApplication(interfaces::Node& node):
     QApplication(qt_argc, const_cast<char **>(&qt_argv)),
@@ -416,7 +416,7 @@ void BitcoinApplication::shutdownResult()
 
 void BitcoinApplication::handleRunawayException(const QString &message)
 {
-    QMessageBox::critical(nullptr, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Merge can no longer continue safely and will quit.") + QString("\n\n") + message);
+    QMessageBox::critical(nullptr, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. HodlCash can no longer continue safely and will quit.") + QString("\n\n") + message);
     ::exit(EXIT_FAILURE);
 }
 
@@ -640,7 +640,7 @@ int GuiMain(int argc, char* argv[])
     /// 7a. parse masternode.conf
     std::string strErr;
     if (!masternodeConfig.read(strErr)) {
-        QMessageBox::critical(0, QObject::tr("Merge Core"),
+        QMessageBox::critical(0, QObject::tr("HodlCash Core"),
             QObject::tr("Error reading masternode configuration file: %1").arg(strErr.c_str()));
         return 0;
     }

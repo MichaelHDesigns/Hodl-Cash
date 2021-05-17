@@ -57,7 +57,7 @@ struct PSBTInput
     bool IsNull() const;
     void FillSignatureData(SignatureData& sigdata) const;
     void FromSignatureData(const SignatureData& sigdata);
-    void Merge(const PSBTInput& input);
+    void HodlCash(const PSBTInput& input);
     PSBTInput() {}
 
     template <typename Stream>
@@ -278,7 +278,7 @@ struct PSBTOutput
     bool IsNull() const;
     void FillSignatureData(SignatureData& sigdata) const;
     void FromSignatureData(const SignatureData& sigdata);
-    void Merge(const PSBTOutput& output);
+    void HodlCash(const PSBTOutput& output);
     PSBTOutput() {}
 
     template <typename Stream>
@@ -392,9 +392,9 @@ struct PartiallySignedTransaction
 
     bool IsNull() const;
 
-    /** Merge psbt into this. The two psbts must have the same underlying CTransaction (i.e. the
-      * same actual Bitcoin transaction.) Returns true if the merge succeeded, false otherwise. */
-    NODISCARD bool Merge(const PartiallySignedTransaction& psbt);
+    /** HodlCash psbt into this. The two psbts must have the same underlying CTransaction (i.e. the
+      * same actual Bitcoin transaction.) Returns true if the hodlcash succeeded, false otherwise. */
+    NODISCARD bool HodlCash(const PartiallySignedTransaction& psbt);
     bool AddInput(const CTxIn& txin, PSBTInput& psbtin);
     bool AddOutput(const CTxOut& txout, const PSBTOutput& psbtout);
     PartiallySignedTransaction() {}

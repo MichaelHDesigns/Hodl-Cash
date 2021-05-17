@@ -146,7 +146,7 @@ startup configuration.
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
 the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
+git hodlcash commit are mentioned.
 
 ### RPC and other APIs
 - #7739 `7ffc2bd` Add abandoned status to listtransactions (jonasschnelli)

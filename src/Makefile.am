@@ -24,37 +24,37 @@ BITCOIN_INCLUDES=-I$(builddir) $(BDB_CPPFLAGS) $(BOOST_CPPFLAGS) $(LEVELDB_CPPFL
 BITCOIN_INCLUDES += -I$(srcdir)/secp256k1/include
 BITCOIN_INCLUDES += $(UNIVALUE_CFLAGS)
 
-LIBBITCOIN_SERVER=libmerge_server.a
-LIBBITCOIN_COMMON=libmerge_common.a
-LIBBITCOIN_CONSENSUS=libmerge_consensus.a
-LIBBITCOIN_CLI=libmerge_cli.a
-LIBBITCOIN_UTIL=libmerge_util.a
-LIBBITCOIN_CRYPTO_BASE=crypto/libmerge_crypto_base.a
-LIBBITCOINQT=qt/libmergeqt.a
+LIBBITCOIN_SERVER=libhodlcash_server.a
+LIBBITCOIN_COMMON=libhodlcash_common.a
+LIBBITCOIN_CONSENSUS=libhodlcash_consensus.a
+LIBBITCOIN_CLI=libhodlcash_cli.a
+LIBBITCOIN_UTIL=libhodlcash_util.a
+LIBBITCOIN_CRYPTO_BASE=crypto/libhodlcash_crypto_base.a
+LIBBITCOINQT=qt/libhodlcashqt.a
 LIBSECP256K1=secp256k1/libsecp256k1.la
 
 if ENABLE_ZMQ
-LIBBITCOIN_ZMQ=libmerge_zmq.a
+LIBBITCOIN_ZMQ=libhodlcash_zmq.a
 endif
 if BUILD_BITCOIN_LIBS
-LIBBITCOINCONSENSUS=libmergeconsensus.la
+LIBBITCOINCONSENSUS=libhodlcashconsensus.la
 endif
 if ENABLE_WALLET
-LIBBITCOIN_WALLET=libmerge_wallet.a
-LIBBITCOIN_WALLET_TOOL=libmerge_wallet_tool.a
+LIBBITCOIN_WALLET=libhodlcash_wallet.a
+LIBBITCOIN_WALLET_TOOL=libhodlcash_wallet_tool.a
 endif
 
 LIBBITCOIN_CRYPTO= $(LIBBITCOIN_CRYPTO_BASE)
 if ENABLE_SSE41
-LIBBITCOIN_CRYPTO_SSE41 = crypto/libmerge_crypto_sse41.a
+LIBBITCOIN_CRYPTO_SSE41 = crypto/libhodlcash_crypto_sse41.a
 LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_SSE41)
 endif
 if ENABLE_AVX2
-LIBBITCOIN_CRYPTO_AVX2 = crypto/libmerge_crypto_avx2.a
+LIBBITCOIN_CRYPTO_AVX2 = crypto/libhodlcash_crypto_avx2.a
 LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_AVX2)
 endif
 if ENABLE_SHANI
-LIBBITCOIN_CRYPTO_SHANI = crypto/libmerge_crypto_shani.a
+LIBBITCOIN_CRYPTO_SHANI = crypto/libhodlcash_crypto_shani.a
 LIBBITCOIN_CRYPTO += $(LIBBITCOIN_CRYPTO_SHANI)
 endif
 
@@ -82,23 +82,23 @@ TESTS =
 BENCHMARKS =
 
 if BUILD_BITCOIND
-  bin_PROGRAMS += merged
+  bin_PROGRAMS += hodlcashd
 endif
 
 if BUILD_BITCOIN_CLI
-  bin_PROGRAMS += merge-cli
+  bin_PROGRAMS += hodlcash-cli
 endif
 if BUILD_BITCOIN_TX
-  bin_PROGRAMS += merge-tx
+  bin_PROGRAMS += hodlcash-tx
 endif
 if ENABLE_WALLET
 if BUILD_BITCOIN_WALLET
-  bin_PROGRAMS += merge-wallet
+  bin_PROGRAMS += hodlcash-wallet
 endif
 endif
 
 .PHONY: FORCE check-symbols check-security
-# merge core #
+# hodlcash core #
 BITCOIN_CORE_H = \
   addrdb.h \
   addrman.h \
@@ -278,15 +278,15 @@ obj/build.h: FORCE
 	@$(MKDIR_P) $(builddir)/obj
 	@$(top_srcdir)/share/genbuild.sh "$(abs_top_builddir)/src/obj/build.h" \
 	  "$(abs_top_srcdir)"
-libmerge_util_a-clientversion.$(OBJEXT): obj/build.h
+libhodlcash_util_a-clientversion.$(OBJEXT): obj/build.h
 
-# server: shared between merged and merge-qt
+# server: shared between hodlcashd and hodlcash-qt
 # Contains code accessing mempool and chain state that is meant to be separated
 # from wallet and gui code (see node/README.md). Shared code should go in
-# libmerge_common or libmerge_util libraries, instead.
-libmerge_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
-libmerge_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmerge_server_a_SOURCES = \
+# libhodlcash_common or libhodlcash_util libraries, instead.
+libhodlcash_server_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(MINIUPNPC_CPPFLAGS) $(EVENT_CFLAGS) $(EVENT_PTHREADS_CFLAGS)
+libhodlcash_server_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcash_server_a_SOURCES = \
   addrdb.cpp \
   addrman.cpp \
   banman.cpp \
@@ -355,16 +355,16 @@ libmerge_server_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 if ENABLE_WALLET
-libmerge_server_a_SOURCES += wallet/init.cpp
+libhodlcash_server_a_SOURCES += wallet/init.cpp
 endif
 if !ENABLE_WALLET
-libmerge_server_a_SOURCES += dummywallet.cpp
+libhodlcash_server_a_SOURCES += dummywallet.cpp
 endif
 
 if ENABLE_ZMQ
-libmerge_zmq_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
-libmerge_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmerge_zmq_a_SOURCES = \
+libhodlcash_zmq_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(ZMQ_CFLAGS)
+libhodlcash_zmq_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcash_zmq_a_SOURCES = \
   zmq/zmqabstractnotifier.cpp \
   zmq/zmqnotificationinterface.cpp \
   zmq/zmqpublishnotifier.cpp \
@@ -372,11 +372,11 @@ libmerge_zmq_a_SOURCES = \
 endif
 
 
-# wallet: shared between merged and merge-qt, but only linked
+# wallet: shared between hodlcashd and hodlcash-qt, but only linked
 # when wallet enabled
-libmerge_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libmerge_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmerge_wallet_a_SOURCES = \
+libhodlcash_wallet_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libhodlcash_wallet_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcash_wallet_a_SOURCES = \
   interfaces/wallet.cpp \
   wallet/coincontrol.cpp \
   wallet/crypter.cpp \
@@ -393,16 +393,16 @@ libmerge_wallet_a_SOURCES = \
   wallet/coinselection.cpp \
   $(BITCOIN_CORE_H)
 
-libmerge_wallet_tool_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libmerge_wallet_tool_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmerge_wallet_tool_a_SOURCES = \
+libhodlcash_wallet_tool_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libhodlcash_wallet_tool_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcash_wallet_tool_a_SOURCES = \
   wallet/wallettool.cpp \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
-crypto_libmerge_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libmerge_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libmerge_crypto_base_a_SOURCES = \
+crypto_libhodlcash_crypto_base_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libhodlcash_crypto_base_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libhodlcash_crypto_base_a_SOURCES = \
   crypto/aes.cpp \
   crypto/aes.h \
   crypto/chacha_poly_aead.h \
@@ -440,31 +440,31 @@ crypto_libmerge_crypto_base_a_SOURCES = \
   crypto/argon2m/argon2/opt.h
 
 if USE_ASM
-crypto_libmerge_crypto_base_a_SOURCES += crypto/sha256_sse4.cpp
+crypto_libhodlcash_crypto_base_a_SOURCES += crypto/sha256_sse4.cpp
 endif
 
-crypto_libmerge_crypto_sse41_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libmerge_crypto_sse41_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libmerge_crypto_sse41_a_CXXFLAGS += $(SSE41_CXXFLAGS)
-crypto_libmerge_crypto_sse41_a_CPPFLAGS += -DENABLE_SSE41
-crypto_libmerge_crypto_sse41_a_SOURCES = crypto/sha256_sse41.cpp
+crypto_libhodlcash_crypto_sse41_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libhodlcash_crypto_sse41_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libhodlcash_crypto_sse41_a_CXXFLAGS += $(SSE41_CXXFLAGS)
+crypto_libhodlcash_crypto_sse41_a_CPPFLAGS += -DENABLE_SSE41
+crypto_libhodlcash_crypto_sse41_a_SOURCES = crypto/sha256_sse41.cpp
 
-crypto_libmerge_crypto_avx2_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libmerge_crypto_avx2_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libmerge_crypto_avx2_a_CXXFLAGS += $(AVX2_CXXFLAGS)
-crypto_libmerge_crypto_avx2_a_CPPFLAGS += -DENABLE_AVX2
-crypto_libmerge_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
+crypto_libhodlcash_crypto_avx2_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libhodlcash_crypto_avx2_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libhodlcash_crypto_avx2_a_CXXFLAGS += $(AVX2_CXXFLAGS)
+crypto_libhodlcash_crypto_avx2_a_CPPFLAGS += -DENABLE_AVX2
+crypto_libhodlcash_crypto_avx2_a_SOURCES = crypto/sha256_avx2.cpp
 
-crypto_libmerge_crypto_shani_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-crypto_libmerge_crypto_shani_a_CPPFLAGS = $(AM_CPPFLAGS)
-crypto_libmerge_crypto_shani_a_CXXFLAGS += $(SHANI_CXXFLAGS)
-crypto_libmerge_crypto_shani_a_CPPFLAGS += -DENABLE_SHANI
-crypto_libmerge_crypto_shani_a_SOURCES = crypto/sha256_shani.cpp
+crypto_libhodlcash_crypto_shani_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+crypto_libhodlcash_crypto_shani_a_CPPFLAGS = $(AM_CPPFLAGS)
+crypto_libhodlcash_crypto_shani_a_CXXFLAGS += $(SHANI_CXXFLAGS)
+crypto_libhodlcash_crypto_shani_a_CPPFLAGS += -DENABLE_SHANI
+crypto_libhodlcash_crypto_shani_a_SOURCES = crypto/sha256_shani.cpp
 
 # consensus: shared between all executables that validate any consensus rules.
-libmerge_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libmerge_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmerge_consensus_a_SOURCES = \
+libhodlcash_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libhodlcash_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcash_consensus_a_SOURCES = \
   amount.h \
   arith_uint256.cpp \
   arith_uint256.h \
@@ -499,10 +499,10 @@ libmerge_consensus_a_SOURCES = \
   util/strencodings.h \
   version.h
 
-# common: shared between merged, and merge-qt and non-server tools
-libmerge_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libmerge_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmerge_common_a_SOURCES = \
+# common: shared between hodlcashd, and hodlcash-qt and non-server tools
+libhodlcash_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libhodlcash_common_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcash_common_a_SOURCES = \
   base58.cpp \
   bech32.cpp \
   bloom.cpp \
@@ -536,9 +536,9 @@ libmerge_common_a_SOURCES = \
 # util: shared between all executables.
 # This library *must* be included to make sure that the glibc
 # backward-compatibility objects and their sanity checks are linked.
-libmerge_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libmerge_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmerge_util_a_SOURCES = \
+libhodlcash_util_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libhodlcash_util_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcash_util_a_SOURCES = \
   support/lockedpool.cpp \
   chainparamsbase.cpp \
   clientversion.cpp \
@@ -575,33 +575,33 @@ libmerge_util_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 if GLIBC_BACK_COMPAT
-libmerge_util_a_SOURCES += compat/glibc_compat.cpp
+libhodlcash_util_a_SOURCES += compat/glibc_compat.cpp
 AM_LDFLAGS += $(COMPAT_LDFLAGS)
 endif
 
-# cli: shared between merge-cli and merge-qt
-libmerge_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libmerge_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-libmerge_cli_a_SOURCES = \
+# cli: shared between hodlcash-cli and hodlcash-qt
+libhodlcash_cli_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+libhodlcash_cli_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcash_cli_a_SOURCES = \
   compat/stdin.h \
   compat/stdin.cpp \
   rpc/client.cpp \
   $(BITCOIN_CORE_H)
 
-nodist_libmerge_util_a_SOURCES = $(srcdir)/obj/build.h
+nodist_libhodlcash_util_a_SOURCES = $(srcdir)/obj/build.h
 #
 
-# merged binary #
-merged_SOURCES = bitcoind.cpp
-merged_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-merged_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-merged_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# hodlcashd binary #
+hodlcashd_SOURCES = bitcoind.cpp
+hodlcashd_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+hodlcashd_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+hodlcashd_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-merged_SOURCES += bitcoind-res.rc
+hodlcashd_SOURCES += bitcoind-res.rc
 endif
 
-merged_LDADD = \
+hodlcashd_LDADD = \
   $(LIBBITCOIN_SERVER) \
   $(LIBBITCOIN_WALLET) \
   $(LIBBITCOIN_COMMON) \
@@ -615,38 +615,38 @@ merged_LDADD = \
   $(LIBMEMENV) \
   $(LIBSECP256K1)
 
-merged_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
+hodlcashd_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(MINIUPNPC_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(ZMQ_LIBS)
 
-# merge-cli binary #
-merge_cli_SOURCES = bitcoin-cli.cpp
-merge_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
-merge_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-merge_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# hodlcash-cli binary #
+hodlcash_cli_SOURCES = bitcoin-cli.cpp
+hodlcash_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
+hodlcash_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+hodlcash_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-merge_cli_SOURCES += bitcoin-cli-res.rc
+hodlcash_cli_SOURCES += bitcoin-cli-res.rc
 endif
 
-merge_cli_LDADD = \
+hodlcash_cli_LDADD = \
   $(LIBBITCOIN_CLI) \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_UTIL) \
   $(LIBBITCOIN_CRYPTO)
 
-merge_cli_LDADD += $(BOOST_LIBS) $(EVENT_LIBS)
+hodlcash_cli_LDADD += $(BOOST_LIBS) $(EVENT_LIBS)
 #
 
-# merge-tx binary #
-merge_tx_SOURCES = bitcoin-tx.cpp
-merge_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-merge_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-merge_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# hodlcash-tx binary #
+hodlcash_tx_SOURCES = bitcoin-tx.cpp
+hodlcash_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+hodlcash_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+hodlcash_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-merge_tx_SOURCES += bitcoin-tx-res.rc
+hodlcash_tx_SOURCES += bitcoin-tx-res.rc
 endif
 
-merge_tx_LDADD = \
+hodlcash_tx_LDADD = \
   $(LIBUNIVALUE) \
   $(LIBBITCOIN_COMMON) \
   $(LIBBITCOIN_UTIL) \
@@ -654,20 +654,20 @@ merge_tx_LDADD = \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBSECP256K1)
 
-merge_tx_LDADD += $(BOOST_LIBS)
+hodlcash_tx_LDADD += $(BOOST_LIBS)
 #
 
-# merge-wallet binary #
-merge_wallet_SOURCES = bitcoin-wallet.cpp
-merge_wallet_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-merge_wallet_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-merge_wallet_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+# hodlcash-wallet binary #
+hodlcash_wallet_SOURCES = bitcoin-wallet.cpp
+hodlcash_wallet_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
+hodlcash_wallet_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+hodlcash_wallet_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
-merge_wallet_SOURCES += bitcoin-wallet-res.rc
+hodlcash_wallet_SOURCES += bitcoin-wallet-res.rc
 endif
 
-merge_wallet_LDADD = \
+hodlcash_wallet_LDADD = \
   $(LIBBITCOIN_WALLET_TOOL) \
   $(LIBBITCOIN_WALLET) \
   $(LIBBITCOIN_COMMON) \
@@ -681,22 +681,22 @@ merge_wallet_LDADD = \
   $(LIBSECP256K1) \
   $(LIBUNIVALUE)
 
-merge_wallet_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(MINIUPNPC_LIBS) $(ZMQ_LIBS)
+hodlcash_wallet_LDADD += $(BOOST_LIBS) $(BDB_LIBS) $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS) $(MINIUPNPC_LIBS) $(ZMQ_LIBS)
 #
 
-# mergeconsensus library #
+# hodlcashconsensus library #
 if BUILD_BITCOIN_LIBS
 include_HEADERS = script/bitcoinconsensus.h
-libmergeconsensus_la_SOURCES = support/cleanse.cpp $(crypto_libmerge_crypto_base_a_SOURCES) $(libmerge_consensus_a_SOURCES)
+libhodlcashconsensus_la_SOURCES = support/cleanse.cpp $(crypto_libhodlcash_crypto_base_a_SOURCES) $(libhodlcash_consensus_a_SOURCES)
 
 if GLIBC_BACK_COMPAT
-  libmergeconsensus_la_SOURCES += compat/glibc_compat.cpp
+  libhodlcashconsensus_la_SOURCES += compat/glibc_compat.cpp
 endif
 
-libmergeconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
-libmergeconsensus_la_LIBADD = $(LIBSECP256K1)
-libmergeconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_BITCOIN_INTERNAL
-libmergeconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libhodlcashconsensus_la_LDFLAGS = $(AM_LDFLAGS) -no-undefined $(RELDFLAGS)
+libhodlcashconsensus_la_LIBADD = $(LIBSECP256K1)
+libhodlcashconsensus_la_CPPFLAGS = $(AM_CPPFLAGS) -I$(builddir)/obj -I$(srcdir)/secp256k1/include -DBUILD_BITCOIN_INTERNAL
+libhodlcashconsensus_la_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 
 endif
 #

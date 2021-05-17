@@ -16,23 +16,23 @@ enum class Source {
    CONFIG_FILE_DEFAULT_SECTION
 };
 
-//! Merge settings from multiple sources in precedence order:
+//! HodlCash settings from multiple sources in precedence order:
 //! Forced config > command line > config file network-specific section > config file default section
 //!
 //! This function is provided with a callback function fn that contains
-//! specific logic for how to merge the sources.
+//! specific logic for how to hodlcash the sources.
 template <typename Fn>
-static void MergeSettings(const Settings& settings, const std::string& section, const std::string& name, Fn&& fn)
+static void HodlCashSettings(const Settings& settings, const std::string& section, const std::string& name, Fn&& fn)
 {
-    // Merge in the forced settings
+    // HodlCash in the forced settings
     if (auto* value = FindKey(settings.forced_settings, name)) {
         fn(SettingsSpan(*value), Source::FORCED);
     }
-    // Merge in the command-line options
+    // HodlCash in the command-line options
     if (auto* values = FindKey(settings.command_line_options, name)) {
         fn(SettingsSpan(*values), Source::COMMAND_LINE);
     }
-    // Merge in the network-specific section of the config file
+    // HodlCash in the network-specific section of the config file
     if (!section.empty()) {
         if (auto* map = FindKey(settings.ro_config, section)) {
             if (auto* values = FindKey(*map, name)) {
@@ -40,7 +40,7 @@ static void MergeSettings(const Settings& settings, const std::string& section, 
             }
         }
     }
-    // Merge in the default section of the config file
+    // HodlCash in the default section of the config file
     if (auto* map = FindKey(settings.ro_config, "")) {
         if (auto* values = FindKey(*map, name)) {
             fn(SettingsSpan(*values), Source::CONFIG_FILE_DEFAULT_SECTION);
@@ -57,7 +57,7 @@ SettingsValue GetSetting(const Settings& settings,
 {
     SettingsValue result;
     bool done = false; // Done merging any more settings sources.
-    MergeSettings(settings, section, name, [&](SettingsSpan span, Source source) {
+    HodlCashSettings(settings, section, name, [&](SettingsSpan span, Source source) {
         // Weird behavior preserved for backwards compatibility: Apply negated
         // setting even if non-negated setting would be ignored. A negated
         // value in the default section is applied to network specific options,
@@ -110,7 +110,7 @@ std::vector<SettingsValue> GetSettingsList(const Settings& settings,
     std::vector<SettingsValue> result;
     bool done = false; // Done merging any more settings sources.
     bool prev_negated_empty = false;
-    MergeSettings(settings, section, name, [&](SettingsSpan span, Source source) {
+    HodlCashSettings(settings, section, name, [&](SettingsSpan span, Source source) {
         // Weird behavior preserved for backwards compatibility: Apply config
         // file settings even if negated on command line. Negating a setting on
         // command line will ignore earlier settings on the command line and
@@ -151,7 +151,7 @@ bool OnlyHasDefaultSectionSetting(const Settings& settings, const std::string& s
 {
     bool has_default_section_setting = false;
     bool has_other_setting = false;
-    MergeSettings(settings, section, name, [&](SettingsSpan span, Source source) {
+    HodlCashSettings(settings, section, name, [&](SettingsSpan span, Source source) {
         if (span.empty()) return;
         else if (source == Source::CONFIG_FILE_DEFAULT_SECTION) has_default_section_setting = true;
         else has_other_setting = true;

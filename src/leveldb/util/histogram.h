@@ -16,7 +16,7 @@ class Histogram {
 
   void Clear();
   void Add(double value);
-  void Merge(const Histogram& other);
+  void HodlCash(const Histogram& other);
 
   std::string ToString() const;
 

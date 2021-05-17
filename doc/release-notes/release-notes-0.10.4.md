@@ -118,7 +118,7 @@ next major release.
 Detailed release notes follow. This overview includes changes that affect
 behavior, not code moves, refactors and string updates. For convenience in locating
 the code changes and accompanying discussion, both the pull request and
-git merge commit are mentioned.
+git hodlcash commit are mentioned.
 
 - #6953 `8b3311f` alias -h for --help
 - #6953 `97546fc` Change URLs to https in debian/control

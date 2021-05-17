@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
-// Copyright (c) 2018-2020 The Merge Core developers
+// Copyright (c) 2018-2020 The HodlCash Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -3516,19 +3516,19 @@ std::set< std::set<CTxDestination> > CWallet::GetAddressGroupings() const
             if ((it = setmap.find(address)) != setmap.end())
                 hits.insert((*it).second);
 
-        // merge all hit groups into a new single group and delete old groups
-        std::set<CTxDestination>* merged = new std::set<CTxDestination>(_grouping);
+        // hodlcash all hit groups into a new single group and delete old groups
+        std::set<CTxDestination>* hodlcashd = new std::set<CTxDestination>(_grouping);
         for (std::set<CTxDestination>* hit : hits)
         {
-            merged->insert(hit->begin(), hit->end());
+            hodlcashd->insert(hit->begin(), hit->end());
             uniqueGroupings.erase(hit);
             delete hit;
         }
-        uniqueGroupings.insert(merged);
+        uniqueGroupings.insert(hodlcashd);
 
         // update setmap
-        for (const CTxDestination& element : *merged)
-            setmap[element] = merged;
+        for (const CTxDestination& element : *hodlcashd)
+            setmap[element] = hodlcashd;
     }
 
     std::set< std::set<CTxDestination> > ret;

@@ -72,7 +72,7 @@ struct SignatureData {
 
     SignatureData() {}
     explicit SignatureData(const CScript& script) : scriptSig(script) {}
-    void MergeSignatureData(SignatureData sigdata);
+    void HodlCashSignatureData(SignatureData sigdata);
 };
 
 // Takes a stream and multiple arguments and serializes them as if first serialized into a vector and then into the stream
